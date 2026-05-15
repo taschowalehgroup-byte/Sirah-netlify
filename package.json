@@ -1,0 +1,8 @@
+{
+  "name": "dentcare-pro",
+  "version": "1.0.0",
+  "description": "DentCare Pro — Dental Practice Management System",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

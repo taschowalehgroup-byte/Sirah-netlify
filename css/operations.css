@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════════════
+   DentCare Pro — Operations & Admin CSS
+   ═══════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════
+   1. AUDIT LOG
+   ══════════════════════════════════════════════════════ */
+.audit-toolbar {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: .75rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   2. INSURANCE TRACKER
+   ══════════════════════════════════════════════════════ */
+.ins-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: .75rem;
+}
+.ins-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+.ins-kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .85rem 1rem;
+  animation: kpiEntrance .4s cubic-bezier(.4,0,.2,1) both;
+  animation-delay: calc(var(--i,0) * .07s);
+}
+.ins-kpi-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: .25rem;
+}
+.ins-kpi-label {
+  font-size: .72rem;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Insurance page tab wrapper */
+.insurance-wrap {
+  padding: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   3. MULTI-BRANCH
+   ══════════════════════════════════════════════════════ */
+#branchSelectorWrap {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.branch-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .75rem;
+  color: var(--text2);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .2rem .7rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   4. 2FA
+   ══════════════════════════════════════════════════════ */
+.twofa-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-top: .5rem;
+}
+.twofa-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: .35rem;
+}
+.twofa-enabled-banner {
+  background: var(--background-success, rgba(6,214,160,.12));
+  border: 1px solid var(--green);
+  border-radius: var(--radius-sm);
+  color: var(--green);
+  padding: .65rem 1rem;
+  font-weight: 600;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}
+.twofa-qr-wrap {
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-flex;
+}
+
+/* 2FA Login overlay */
+#twofaLoginOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#twofaLoginOverlay:not(.active) { display: none; }
+.twofa-login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  min-width: 320px;
+  box-shadow: var(--shadow);
+  animation: modalEntrance .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+.twofa-login-icon  { font-size: 2.5rem; margin-bottom: .5rem; }
+.twofa-login-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: .35rem;
+}
+.twofa-login-sub { font-size: .85rem; color: var(--text2); margin-bottom: 1.25rem; }
+.twofa-otp-input {
+  width: 160px;
+  text-align: center;
+  letter-spacing: .3em;
+  font-size: 1.4rem;
+  font-family: monospace;
+  padding: .6rem;
+  background: var(--bg3);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition);
+  margin-bottom: 1rem;
+}
+.twofa-otp-input:focus { border-color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════
+   INSURANCE TAB IN FINANCE PAGE
+   ══════════════════════════════════════════════════════ */
+.finance-tabs-bar {
+  display: flex;
+  gap: .25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.fin-main-tab {
+  padding: .55rem 1.1rem;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text2);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.fin-main-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.fin-main-tab:hover { color: var(--text); }
+
+/* ══════════════════════════════════════════════════════
+   AUDIT TAB IN SETTINGS PAGE
+   ══════════════════════════════════════════════════════ */
+.audit-section-wrap {
+  margin-top: 1rem;
+}

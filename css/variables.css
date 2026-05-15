@@ -1,0 +1,105 @@
+/* ═══════════════════════════════════════════════════════
+   DentCare Pro — CSS Variables & Design Tokens
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Colors ──────────────────────────────────────── */
+  --bg:       #0a0d14;
+  --bg2:      #111520;
+  --bg3:      #171c2b;
+  --card:     #131825;
+  --surface2: #1a2035;
+  --border:   #1e2640;
+  --accent:   #00d4ff;
+  --accent2:  #00ffb3;
+  --red:      #ff4466;
+  --orange:   #ff8c42;
+  --yellow:   #ffd166;
+  --green:    #06d6a0;
+  --text:     #e8eaf6;
+  --text2:    #7b84a3;
+  --text3:    #4a5070;
+
+  /* ── Spacing & Sizing ────────────────────────────── */
+  --shadow:       0 8px 32px rgba(0,0,0,.5);
+  --radius:       14px;
+  --radius-sm:    8px;
+  --transition:   .25s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0 }
+html { font-size:15px; scroll-behavior:smooth }
+
+body {
+  font-family:'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── Utility Classes ───────────────────────────────── */
+.hidden { display:none!important }
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width:5px; height:5px }
+::-webkit-scrollbar-track { background:transparent }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:10px }
+::-webkit-scrollbar-thumb:hover { background:var(--text3) }
+
+/* ── Animations ────────────────────────────────────── */
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes slideIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:none} }
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+@keyframes statPop { from{opacity:0;transform:scale(.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+@keyframes badgePulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+@keyframes countUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes blobFloat {
+  0%,100%{ transform:translate(0,0) scale(1) }
+  33%     { transform:translate(30px,-30px) scale(1.05) }
+  66%     { transform:translate(-20px,20px) scale(.95) }
+}
+@keyframes toothBounce {
+  0%,100%{ transform:translateY(0) }
+  50%    { transform:translateY(-10px) }
+}
+@keyframes modalIn { from{opacity:0;transform:scale(.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+@keyframes toastIn  { from{opacity:0;transform:translateX(100%)} to{opacity:1;transform:none} }
+@keyframes toastOut { from{opacity:1;transform:none} to{opacity:0;transform:translateX(100%)} }
+
+/* ── Arabic / RTL Language Support ─────────────────────── */
+body.lang-ar {
+  direction: rtl;
+  font-family: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'DM Sans', sans-serif;
+}
+body.lang-ar .sidebar-nav     { text-align: right; }
+body.lang-ar .nav-item        { flex-direction: row-reverse; }
+body.lang-ar .nav-badge       { margin-left: 0; margin-right: auto; }
+body.lang-ar .sidebar-brand   { flex-direction: row-reverse; }
+body.lang-ar .sidebar-user    { flex-direction: row-reverse; }
+body.lang-ar .modal-head      { flex-direction: row-reverse; }
+body.lang-ar .modal-foot      { flex-direction: row-reverse; }
+body.lang-ar .actions         { flex-direction: row-reverse; }
+body.lang-ar .topbar-left     { flex-direction: row-reverse; }
+body.lang-ar .topbar-right    { flex-direction: row-reverse; }
+body.lang-ar .page-bar        { flex-direction: row-reverse; }
+body.lang-ar .page-toolbar    { flex-direction: row-reverse; }
+body.lang-ar .card-head       { flex-direction: row-reverse; }
+body.lang-ar .filter-tabs     { flex-direction: row-reverse; }
+body.lang-ar table            { direction: rtl; }
+body.lang-ar th, body.lang-ar td { text-align: right; }
+body.lang-ar .toast-container { left: 1rem; right: auto; }
+body.lang-ar input, body.lang-ar textarea, body.lang-ar select { text-align: right; }
+body.lang-ar .form-grid       { direction: rtl; }
+body.lang-ar .detail-tabs     { flex-direction: row-reverse; }
+body.lang-ar .fin-card        { text-align: right; }
+body.lang-ar .dash-kpi-grid   { direction: rtl; }
+body.lang-ar .np-tabs         { flex-direction: row-reverse; }
+/* Sidebar stays left even in RTL (standard clinic UI) */
+body.lang-ar #sidebar         { right: auto; left: 0; border-right: 1px solid var(--border); border-left: none; }
+
+/* Arabic translations via data attributes (toggled by JS) */
+/* Usage: <span data-en="Save" data-ar="حفظ">Save</span> */
+
