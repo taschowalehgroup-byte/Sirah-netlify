@@ -1,0 +1,24 @@
+<!-- ═══════════════════════════════════════════════════════ DOCTORS -->
+<section id="pg-doctors" class="page-content">
+
+  <!-- 3D Doctor Orrery -->
+  <div class="orrery-card">
+    <div class="orrery-header">
+      <span class="orrery-title">🪐 Doctor Load Orrery — Orbit speed &amp; planet size reflect patient volume</span>
+      <span class="orrery-hint">🖱 Drag to rotate · Glowing = on duty</span>
+    </div>
+    <div id="orreryMount"></div>
+  </div>
+
+  <div class="page-bar">
+    <h2 style="color:var(--text)">Medical Staff</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button class="btn-icon" onclick="window.print()" title="Print">🖨️ Print</button>
+      <button class="btn-icon" onclick="Pages.doctors.importFile()">⬆ Import</button>
+      <button class="btn-icon" onclick="Pages.doctors.exportExcel()">⬇ Excel</button>
+      <button class="btn-icon" onclick="Pages.doctors.exportJson()">⬇ JSON</button>
+      <button class="btn-primary" onclick="Modals.addDoctor()">+ Add Doctor</button>
+    </div>
+  </div>
+  <div class="doctors-grid" id="doctorsGrid"></div>
+</section>

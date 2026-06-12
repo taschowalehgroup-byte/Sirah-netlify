@@ -1,0 +1,72 @@
+<!-- ═══════════════════════════════════════════════════════ SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <span class="brand-icon">🦷</span>
+    <div>
+      <div class="brand-name">DentCare<b>Pro</b></div>
+      <div class="brand-ver">v2.0</div>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar" id="sidebarAvatar">A</div>
+    <div>
+      <div class="user-name" id="sidebarName">Admin</div>
+      <div class="user-role" id="sidebarRole">Administrator</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Main</div>
+    <a class="nav-item active" data-page="dashboard" onclick="App.page('dashboard')">
+      <span class="nav-icon">⊞</span><span>Dashboard</span>
+    </a>
+
+    <div class="sidebar-label">Clinical</div>
+    <a class="nav-item" data-page="patients" onclick="App.page('patients')">
+      <span class="nav-icon">👤</span><span>Patients</span>
+      <span class="nav-badge" id="badgePatients">0</span>
+    </a>
+    <a class="nav-item" data-page="appointments" onclick="App.page('appointments')">
+      <span class="nav-icon">📅</span><span>Appointments</span>
+      <span class="nav-badge" id="badgeAppts">0</span>
+    </a>
+    <a class="nav-item" data-page="calendar" onclick="App.page('calendar')">
+      <span class="nav-icon">🗓️</span><span>Calendar</span>
+    </a>
+    <a class="nav-item" data-page="treatments" onclick="App.page('treatments')">
+      <span class="nav-icon">🦷</span><span>Treatments</span>
+    </a>
+
+    <div class="sidebar-label">Administration</div>
+    <a class="nav-item" data-page="doctors" onclick="App.page('doctors')">
+      <span class="nav-icon">⚕️</span><span>Doctors</span>
+    </a>
+    <a class="nav-item" data-page="finance" onclick="App.page('finance')">
+      <span class="nav-icon">💰</span><span>Finance</span>
+    </a>
+    <a class="nav-item" data-page="inventory" onclick="App.page('inventory')">
+      <span class="nav-icon">📦</span><span>Inventory</span>
+      <span class="nav-badge danger" id="badgeInventory">0</span>
+    </a>
+    <a class="nav-item" data-page="analytics" onclick="App.page('analytics')">
+      <span class="nav-icon">📊</span><span>Analytics</span>
+    </a>
+    <a class="nav-item" data-page="feedback" onclick="App.page('feedback')">
+      <span class="nav-icon">⭐</span><span>Feedback</span>
+      <span class="nav-badge" id="badgeFeedback"></span>
+    </a>
+    <a class="nav-item" data-page="workhours" onclick="App.page('workhours')">
+      <span class="nav-icon">🕐</span><span>Work Hours</span>
+    </a>
+    <a class="nav-item admin-only" data-page="passwords" onclick="App.page('passwords')">
+      <span class="nav-icon">🔑</span><span>Passwords</span>
+    </a>
+    <a class="nav-item admin-only" data-page="messages" onclick="App.page('messages')">
+      <span class="nav-icon">✉️</span><span>Messages</span>
+      <span class="nav-badge danger" id="badgeMessages" style="display:none">0</span>
+    </a>
+    <a class="nav-item" data-page="settings" onclick="App.page('settings')">
+      <span class="nav-icon">⚙️</span><span>Settings</span>
+    </a>
+  </nav>
+  <button class="sidebar-logout" onclick="App.logout()">⬡ Logout</button>
+</aside>

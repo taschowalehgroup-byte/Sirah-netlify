@@ -1,0 +1,17 @@
+<!-- ═══════════════════════════════════════════════════════ MODAL: NEW TRANSACTION -->
+<div id="modalNewTx" class="modal modal-sm" style="display:none">
+  <div class="modal-head"><h3>💰 Add Transaction</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+  <div class="modal-body">
+    <div class="form-grid">
+      <div class="form-group full"><label>Description *</label><input id="tx_desc" placeholder="Transaction description"></div>
+      <div class="form-group"><label>Type *</label><select id="tx_type"><option value="income">Income</option><option value="expense">Expense</option></select></div>
+      <div class="form-group"><label>Category</label><select id="tx_cat"><option>Treatment</option><option>Consultation</option><option>Supplies</option><option>Equipment</option><option>Salary</option><option>Rent</option><option>Utilities</option><option>Other</option></select></div>
+      <div class="form-group"><label>Amount (E£) *</label><input id="tx_amount" type="number" placeholder="0.00"></div>
+      <div class="form-group"><label>Date *</label><input id="tx_date" type="date"></div>
+    </div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+    <button class="btn-primary" onclick="Actions.addTransaction()">✓ Add Transaction</button>
+  </div>
+</div>

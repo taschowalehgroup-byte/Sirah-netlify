@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentCare Pro — Advanced Dental Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/modals.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/features.css">
+<link rel="stylesheet" href="css/mobile.css">
+<meta name="theme-color" content="#1a1f2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ DENTAL INTRO -->
+<div id="cyberIntro" style="position:fixed;inset:0;z-index:99999;background:#f0f7ff;overflow:hidden;font-family:'DM Sans','Syne',sans-serif;">
+
+  <!-- Soft animated background circles -->
+  <div class="dci-circle" style="width:380px;height:380px;top:-100px;left:-100px;animation-delay:0s;"></div>
+  <div class="dci-circle" style="width:260px;height:260px;bottom:-60px;right:-40px;animation-delay:2s;"></div>
+  <div class="dci-circle" style="width:180px;height:180px;top:45%;left:68%;animation-delay:4s;"></div>
+
+  <!-- Floating tooth particles -->
+  <div class="dci-particle" style="left:7%;top:18%;animation-delay:0s;animation-duration:7s;">🦷</div>
+  <div class="dci-particle" style="left:16%;top:68%;animation-delay:1.5s;animation-duration:9s;">✦</div>
+  <div class="dci-particle" style="left:82%;top:14%;animation-delay:0.8s;animation-duration:8s;">🦷</div>
+  <div class="dci-particle" style="left:89%;top:62%;animation-delay:2.5s;animation-duration:7.5s;">✦</div>
+  <div class="dci-particle" style="left:50%;top:7%;animation-delay:3s;animation-duration:6s;">🦷</div>
+  <div class="dci-particle" style="left:33%;top:80%;animation-delay:1s;animation-duration:10s;">✦</div>
+  <div class="dci-particle" style="left:66%;top:84%;animation-delay:4s;animation-duration:8s;">🦷</div>
+
+  <!-- Subtle grid lines -->
+  <div style="position:absolute;inset:0;pointer-events:none;opacity:0.05;">
+    <div style="position:absolute;height:1px;width:100%;top:50%;background:#3b82f6;"></div>
+    <div style="position:absolute;width:1px;height:100%;left:50%;background:#3b82f6;"></div>
+  </div>
+
+  <!-- Main content -->
+  <div id="dciContent" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;opacity:0;transform:translateY(24px);transition:opacity 0.9s ease,transform 0.9s ease;">
+
+    <!-- Logo ring -->
+    <div id="dciLogoRing" style="width:108px;height:108px;border-radius:50%;background:white;border:3px solid #3b82f6;display:flex;align-items:center;justify-content:center;margin-bottom:20px;animation:dciPulse 2.5s ease-in-out infinite;overflow:hidden;">
+      <!-- Default tooth SVG — replaced by clinic logo if set -->
+      <svg id="dciDefaultLogo" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:62px;height:62px;">
+        <path d="M28 6C18 6 10 13 10 21c0 4 1.5 7.5 4 10l2 14c0.5 2.5 2.5 4 5 4h14c2.5 0 4.5-1.5 5-4l2-14c2.5-2.5 4-6 4-10 0-8-8-15-18-15z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M20 21 Q28 28 36 21" stroke="#3b82f6" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="22" cy="17" r="2.5" fill="#93c5fd"/>
+        <circle cx="34" cy="17" r="2.5" fill="#93c5fd"/>
+      </svg>
+      <img id="dciClinicLogo" src="" alt="Clinic Logo" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"/>
+    </div>
+
+    <!-- Clinic name (dynamic) -->
+    <div id="dciClinicName" style="font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,38px);font-weight:800;color:#1e3a5f;letter-spacing:-0.5px;text-align:center;margin-bottom:6px;opacity:0;transform:translateY(14px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;">Dent Care <span style="color:#3b82f6;">Pro</span></div>
+
+    <!-- Divider -->
+    <div id="dciDivider" style="height:2px;width:0;background:linear-gradient(to right,transparent,#3b82f6,transparent);transition:width 1s ease 0.5s;margin:6px 0 10px;"></div>
+
+    <!-- Tagline -->
+    <div id="dciTagline" style="font-size:12px;color:#6b7f99;letter-spacing:3px;text-transform:uppercase;text-align:center;opacity:0;transform:translateY(10px);transition:opacity 0.7s ease 0.55s,transform 0.7s ease 0.55s;">Advanced Dental Management System</div>
+
+    <!-- Feature icons -->
+    <div id="dciFeats" style="display:flex;gap:24px;margin-top:28px;opacity:0;transform:translateY(12px);transition:opacity 0.7s ease 0.8s,transform 0.7s ease 0.8s;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="dci-feat-icon">📅</div>
+        <span style="font-size:11px;color:#6b7f99;font-weight:500;"><span data-t="Appointments">Appointments</span></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="dci-feat-icon">👤</div>
+        <span style="font-size:11px;color:#6b7f99;font-weight:500;"><span data-t="Patients">Patients</span></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="dci-feat-icon">💰</div>
+        <span style="font-size:11px;color:#6b7f99;font-weight:500;"><span data-t="Finance">Finance</span></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="dci-feat-icon">📊</div>
+        <span style="font-size:11px;color:#6b7f99;font-weight:500;"><span data-t="Analytics">Analytics</span></span>
+      </div>
+    </div>
+
+    <!-- Checklist -->
+    <div id="dciChecks" style="display:flex;flex-direction:column;gap:7px;margin-top:20px;opacity:0;transition:opacity 0.6s ease 1s;">
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#4a6080;">
+        <div style="width:17px;height:17px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#3b82f6;">✓</div>
+        HIPAA Compliant &amp; Secure
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#4a6080;">
+        <div style="width:17px;height:17px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#3b82f6;">✓</div>
+        Real-time Patient Records
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#4a6080;">
+        <div style="width:17px;height:17px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#3b82f6;">✓</div>
+        Multi-doctor Clinic Support
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div id="dciProgressWrap" style="margin-top:28px;width:min(220px,80vw);opacity:0;transition:opacity 0.5s ease 1.1s;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#aab8cc;margin-bottom:7px;">
+        <span>Loading system</span><span id="dciPct">0%</span>
+      </div>
+      <div style="width:100%;height:4px;border-radius:99px;background:#dbeafe;overflow:hidden;">
+        <div id="dciBar" style="height:100%;width:0%;background:#3b82f6;border-radius:99px;transition:width 0.3s ease;"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+.dci-circle { position:absolute; border-radius:50%; background:rgba(59,130,246,0.07); animation:dciFloat 8s ease-in-out infinite; }
+.dci-particle { position:absolute; opacity:0; animation:dciParticle 6s ease-in-out infinite; font-size:18px; user-select:none; pointer-events:none; }
+.dci-feat-icon { width:48px; height:48px; border-radius:14px; background:white; border:1.5px solid #dbeafe; display:flex; align-items:center; justify-content:center; font-size:20px; transition:transform 0.3s ease; }
+.dci-feat-icon:hover { transform:translateY(-3px); }
+@keyframes dciFloat { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-20px) scale(1.05);} }
+@keyframes dciParticle { 0%{opacity:0;transform:translateY(30px) rotate(0deg);} 20%{opacity:0.35;} 80%{opacity:0.2;} 100%{opacity:0;transform:translateY(-80px) rotate(180deg);} }
+@keyframes dciPulse { 0%,100%{box-shadow:0 8px 32px rgba(59,130,246,0.18);} 50%{box-shadow:0 8px 48px rgba(59,130,246,0.36);} }
+</style>
+
+<script>
+(function() {
+  function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+  function dismissIntro() {
+    const el = document.getElementById('cyberIntro');
+    el.style.transition = 'opacity 0.9s ease';
+    el.style.opacity = '0';
+    setTimeout(() => el.style.display = 'none', 900);
+  }
+
+  async function runDentalIntro() {
+    // Load clinic settings from in-memory DB (no server needed)
+    let clinicName = 'Dent Care Pro';
+    let clinicLogo = '';
+    try {
+      // Wait for DB to be available (it loads via seed-data.js + api.js)
+      const checkDB = () => new Promise(resolve => {
+        const t = setInterval(() => {
+          if (typeof DB !== 'undefined') { clearInterval(t); resolve(); }
+        }, 50);
+        setTimeout(() => { clearInterval(t); resolve(); }, 3000);
+      });
+      await checkDB();
+      if (typeof DB !== 'undefined') {
+        const data = await DB.settings.get();
+        if (data && data.clinic && data.clinic.name) clinicName = data.clinic.name;
+        if (data && data.clinic && data.clinic.logo) clinicLogo = data.clinic.logo;
+      }
+    } catch(e) {}
+
+    // Update clinic name in intro
+    const nameEl = document.getElementById('dciClinicName');
+    const parts = clinicName.trim().split(' ');
+    if (parts.length >= 2) {
+      const last = parts.pop();
+      nameEl.innerHTML = parts.join(' ') + ' <span style="color:#3b82f6;">' + last + '</span>';
+    } else {
+      nameEl.textContent = clinicName;
+    }
+
+    // If a clinic logo is set, show it instead of the tooth SVG
+    if (clinicLogo) {
+      const imgEl = document.getElementById('dciClinicLogo');
+      const defEl = document.getElementById('dciDefaultLogo');
+      imgEl.src = clinicLogo;
+      imgEl.style.display = 'block';
+      defEl.style.display = 'none';
+    }
+
+    // Animate in
+    await sleep(200);
+    const content = document.getElementById('dciContent');
+    content.style.opacity = '1';
+    content.style.transform = 'translateY(0)';
+
+    await sleep(300);
+    nameEl.style.opacity = '1';
+    nameEl.style.transform = 'translateY(0)';
+
+    await sleep(200);
+    document.getElementById('dciDivider').style.width = '200px';
+
+    await sleep(200);
+    const tagline = document.getElementById('dciTagline');
+    tagline.style.opacity = '1';
+    tagline.style.transform = 'translateY(0)';
+
+    await sleep(350);
+    document.getElementById('dciFeats').style.opacity = '1';
+    document.getElementById('dciFeats').style.transform = 'translateY(0)';
+
+    await sleep(250);
+    document.getElementById('dciChecks').style.opacity = '1';
+
+    await sleep(150);
+    document.getElementById('dciProgressWrap').style.opacity = '1';
+
+    // Progress bar
+    let p = 0;
+    const bar = document.getElementById('dciBar');
+    const pct = document.getElementById('dciPct');
+    await new Promise(resolve => {
+      const pInt = setInterval(() => {
+        p += Math.random() * 5 + 2;
+        if (p >= 100) { p = 100; clearInterval(pInt); resolve(); }
+        bar.style.width = p + '%';
+        pct.textContent = Math.floor(p) + '%';
+      }, 55);
+    });
+
+    await sleep(600);
+    dismissIntro();
+  }
+
+  runDentalIntro();
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════ LOGIN -->
+<div id="loginScreen" class="screen active">
+  <div class="login-bg">
+    <div id="loginParticles"></div>
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="teeth-anim">
+      <svg viewBox="0 0 200 80" class="teeth-svg">
+        <g class="tooth" style="--i:0"><rect x="5"  y="20" width="22" height="50" rx="8"/></g>
+        <g class="tooth" style="--i:1"><rect x="32" y="10" width="22" height="60" rx="8"/></g>
+        <g class="tooth" style="--i:2"><rect x="59" y="5"  width="22" height="65" rx="8"/></g>
+        <g class="tooth" style="--i:3"><rect x="86" y="5"  width="22" height="65" rx="8"/></g>
+        <g class="tooth" style="--i:4"><rect x="113"y="10" width="22" height="60" rx="8"/></g>
+        <g class="tooth" style="--i:5"><rect x="140"y="20" width="22" height="50" rx="8"/></g>
+        <g class="tooth" style="--i:6"><rect x="167"y="28" width="22" height="42" rx="8"/></g>
+      </svg>
+    </div>
+  </div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-icon">🦷</div>
+      <h1>DentCare<span>Pro</span></h1>
+      <p>Advanced Dental Management System</p>
+    </div>
+    <div class="login-form">
+      <div class="form-group">
+        <label>Username</label>
+        <select id="loginUser" class="login-select">
+          <option value="">— Select your username —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password">
+      </div>
+      <div id="loginErr" class="login-error hidden">Invalid credentials</div>
+      <button class="btn-login" onclick="App.login()">Access System →</button>
+      <div class="forgot-pw-wrap">
+        <button class="btn-forgot" onclick="App.forgotPassword()">🔒 Forgot Password?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ APP -->
+<div id="appScreen" class="screen">
+  <div id="sidebarOverlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active');document.body.classList.remove('sidebar-open');"></div>
+  <aside id="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">🦷</span>
+      <div>
+        <div class="brand-name">DentCare<b>Pro</b></div>
+        <div class="brand-ver">v2.0</div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebarAvatar">A</div>
+      <div>
+        <div class="user-name" id="sidebarName">Admin</div>
+        <div class="user-role" id="sidebarRole">Administrator</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-en="Main" data-ar="الرئيسية">Main</div>
+      <a class="nav-item active" style="--ni:0" data-page="dashboard" onclick="App.page('dashboard')">
+        <span class="nav-icon">⊞</span><span data-en="Dashboard" data-ar="لوحة التحكم"><span data-t="Dashboard">Dashboard</span></span>
+      </a>
+
+      <div class="sidebar-label" data-en="Clinical" data-ar="سريري">Clinical</div>
+      <a class="nav-item" style="--ni:1" data-page="waiting" onclick="App.page('waiting')">
+        <span class="nav-icon">🪑</span><span data-en="Waiting Room" data-ar="غرفة الانتظار"><span data-t="Waiting Room">Waiting Room</span></span>
+        <span class="nav-badge danger" id="badgeWaiting" style="display:none">0</span>
+      </a>
+      <a class="nav-item" style="--ni:2" data-page="patients" onclick="App.page('patients')">
+        <span class="nav-icon">👤</span><span data-en="Patients" data-ar="المرضى"><span data-t="Patients">Patients</span></span>
+        <span class="nav-badge" id="badgePatients">0</span>
+      </a>
+      <a class="nav-item" style="--ni:3" data-page="appointments" onclick="App.page('appointments')">
+        <span class="nav-icon">📅</span><span data-en="Appointments" data-ar="المواعيد"><span data-t="Appointments">Appointments</span></span>
+        <span class="nav-badge" id="badgeAppts">0</span>
+      </a>
+      <a class="nav-item" style="--ni:4" data-page="calendar" onclick="App.page('calendar')">
+        <span class="nav-icon">🗓️</span><span data-en="Calendar" data-ar="التقويم"><span data-t="Calendar">Calendar</span></span>
+      </a>
+      <a class="nav-item" style="--ni:5" data-page="treatments" onclick="App.page('treatments')">
+        <span class="nav-icon">🦷</span><span data-en="Treatments" data-ar="العلاجات"><span data-t="Treatments">Treatments</span></span>
+      </a>
+
+      <div class="sidebar-label" data-en="Administration" data-ar="الإدارة">Administration</div>
+      <a class="nav-item" style="--ni:6" data-page="doctors" onclick="App.page('doctors')">
+        <span class="nav-icon">⚕️</span><span data-en="Doctors" data-ar="الأطباء"><span data-t="Doctors">Doctors</span></span>
+      </a>
+      <a class="nav-item" style="--ni:7" data-page="abilities" onclick="App.page('abilities')">
+        <span class="nav-icon">🎯</span><span data-en="Abilities" data-ar="القدرات"><span data-t="Abilities">Abilities</span></span>
+      </a>
+      <a class="nav-item" style="--ni:8" data-page="finance" onclick="App.page('finance')">
+        <span class="nav-icon">💰</span><span data-en="Finance" data-ar="المالية"><span data-t="Finance">Finance</span></span>
+      </a>
+      <a class="nav-item" style="--ni:8b" data-page="bulkexpense" onclick="App.page('bulkexpense')">
+        <span class="nav-icon">💳</span><span data-en="Bulk Expenses" data-ar="مدفوعات جماعية">Bulk Expenses</span>
+      </a>
+      <a class="nav-item" style="--ni:8c" data-page="insurance" onclick="App.page('insurance')">
+        <span class="nav-icon">🏥</span><span data-en="Insurance" data-ar="التأمين">Insurance</span>
+        <span class="nav-badge danger" id="badgeInsurance"></span>
+      </a>
+      <a class="nav-item" style="--ni:9" data-page="inventory" onclick="App.page('inventory')">
+        <span class="nav-icon">📦</span><span data-en="Inventory" data-ar="المخزون"><span data-t="Inventory">Inventory</span></span>
+        <span class="nav-badge danger" id="badgeInventory">0</span>
+      </a>
+      <a class="nav-item" style="--ni:9a1" data-page="suppliers" onclick="App.page('suppliers')">
+        <span class="nav-icon">🏢</span><span data-en="Suppliers" data-ar="الموردون">Suppliers</span>
+      </a>
+      <a class="nav-item" style="--ni:9a2" data-page="laborders" onclick="App.page('laborders')">
+        <span class="nav-icon">🧪</span><span data-en="Lab Orders" data-ar="طلبات المختبر">Lab Orders</span>
+        <span class="nav-badge danger" id="badgeLabPending"></span>
+      </a>
+      <a class="nav-item" style="--ni:9a3" data-page="imaging" onclick="App.page('imaging')">
+        <span class="nav-icon">🖼️</span><span data-en="Imaging" data-ar="التصوير">Imaging</span>
+      </a>
+      <a class="nav-item" style="--ni:9b" data-page="services" onclick="App.page('services')">
+        <span class="nav-icon">🦷</span><span data-en="Services" data-ar="الخدمات"><span data-t="Services">Services</span></span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:9c" data-page="employment" onclick="App.page('employment')">
+        <span class="nav-icon">👥</span><span data-en="Employment" data-ar="التوظيف"><span data-t="Employment">Employment</span></span>
+      </a>
+      <a class="nav-item" style="--ni:10" data-page="analytics" onclick="App.page('analytics')">
+        <span class="nav-icon">📊</span><span data-en="Analytics" data-ar="التحليلات"><span data-t="Analytics">Analytics</span></span>
+      </a>
+      <a class="nav-item" style="--ni:10b" data-page="feedback" onclick="App.page('feedback')">
+        <span class="nav-icon">⭐</span><span data-en="Feedback" data-ar="التقييمات">Feedback</span>
+        <span class="nav-badge" id="badgeFeedback"></span>
+      </a>
+      <a class="nav-item" style="--ni:10c" data-page="workhours" onclick="App.page('workhours')">
+        <span class="nav-icon">🕐</span><span data-en="Work Hours" data-ar="ساعات العمل">Work Hours</span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:11" data-page="commissions" onclick="App.page('commissions')">
+        <span class="nav-icon">📊</span><span data-en="Commissions" data-ar="العمولات"><span data-t="Commissions">Commissions</span></span>
+      </a>
+      <a class="nav-item" style="--ni:12" data-page="installments" onclick="App.page('installments')">
+        <span class="nav-icon">💳</span><span data-en="Payment Plans" data-ar="خطط الدفع">Payment Plans</span>
+      </a>
+      <a class="nav-item" style="--ni:13" data-page="recip" onclick="App.page('recip')">
+        <span class="nav-icon">🧾</span><span data-en="Receipts" data-ar="الإيصالات">Receipts</span>
+      </a>
+      <a class="nav-item" style="--ni:14" data-page="prescription" onclick="App.page('prescription')">
+        <span class="nav-icon">℞</span><span data-en="Prescriptions" data-ar="الوصفات">Prescriptions</span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:15" data-page="passwords" onclick="App.page('passwords')">
+        <span class="nav-icon">🔑</span><span data-en="Passwords" data-ar="كلمات المرور"><span data-t="Passwords">Passwords</span></span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:16" data-page="discount_codes" onclick="App.page('discount_codes')">
+        <span class="nav-icon">🏷</span><span data-en="Discount Codes" data-ar="أكواد الخصم">Discount Codes</span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:17" data-page="backup" onclick="App.page('backup')">
+        <span class="nav-icon">💾</span><span data-en="Backup" data-ar="النسخ الاحتياطي"><span data-t="Backup">Backup</span></span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:18" data-page="messages" onclick="App.page('messages')">
+        <span class="nav-icon">✉️</span><span data-en="Messages" data-ar="الرسائل"><span data-t="Messages">Messages</span></span>
+        <span class="nav-badge danger" id="badgeMessages" style="display:none">0</span>
+      </a>
+      <a class="nav-item admin-only" style="--ni:18b" data-page="whatsappbot" onclick="App.page('whatsappbot')">
+        <span class="nav-icon">💬</span><span data-en="WhatsApp Bot" data-ar="بوت واتساب">WhatsApp Bot</span>
+      </a>
+      <a class="nav-item" style="--ni:19" data-page="settings" onclick="App.page('settings')">
+        <span class="nav-icon">⚙️</span><span data-en="Settings" data-ar="الإعدادات"><span data-t="Settings">Settings</span></span>
+      </a>
+    </nav>
+    <button class="sidebar-logout" onclick="App.logout()">⬡ Logout</button>
+  </aside>
+
+  <main id="main">
+    <header id="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="App.toggleSidebar()">☰</button>
+        <div id="pageTitle" class="page-title"><span data-t="Dashboard">Dashboard</span></div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date" id="liveTime"></div>
+        <button class="btn-icon" id="searchTriggerBtn" onclick="GlobalSearch.open()" title="Global Search (press /)">🔍 <span class="topbar-btn-label">Search</span></button>
+        <div class="notif-wrap">
+          <button class="btn-icon" id="notifBtn" onclick="Notifications.toggle()" title="Notifications">🔔</button>
+          <span id="notifBadge" style="display:none">0</span>
+          <div id="notifPanel">
+            <div class="notif-head">
+              <span>Notifications</span>
+              <button class="notif-clear-btn" onclick="Notifications.refresh()">Refresh</button>
+            </div>
+            <div id="notifList"></div>
+            <div class="notif-foot">DentCare Pro Notifications</div>
+          </div>
+        </div>
+        <button class="btn-icon mobile-hide" id="themeToggleBtn" onclick="Theme.toggle()" title="Toggle theme">☀️</button>
+        <button class="btn-icon mobile-hide" onclick="Modals.checkFollowUps()" title="Check Follow-up Alerts">🔄</button>
+        <button class="btn-icon mobile-hide" onclick="Modals.toggleLanguage()" title="Toggle Language" id="langToggleBtn">🌐 AR</button>
+        <button class="btn-icon" onclick="Modals.newPatient()" data-en="+ Patient" data-ar="+ مريض">+ Patient</button>
+        <button class="btn-icon accent" onclick="Modals.newAppointment()" data-en="+ Appt" data-ar="+ موعد">+ Appt</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="pg-dashboard" class="page-content active">
+      <!-- KPI Cards -->
+      <div class="dash-kpi-grid" id="dashKpiGrid"></div>
+
+
+      <!-- 3D Tooth Widget -->
+      <div class="tooth3d-card">
+        <div class="tooth3d-canvas-wrap">
+          <canvas id="tooth3dCanvas" width="220" height="180"></canvas>
+        </div>
+        <div class="tooth3d-info">
+          <div class="tooth3d-title">🦷 DentCare Pro</div>
+          <div class="tooth3d-sub">Your all-in-one dental clinic management system. Drag the tooth to rotate it.</div>
+          <div class="tooth3d-hint">🖱️ Drag to rotate &nbsp;·&nbsp; Auto-spins on release</div>
+        </div>
+        <div id="dashParticles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;border-radius:inherit"></div>
+      </div>
+
+      <!-- QUICK ACTIONS (RECEPTION FOCUS) -->
+      <div class="card" style="margin-bottom:1.5rem">
+        <h3 style="margin-bottom:1rem;color:var(--text);font-size:1.1rem;display:flex;align-items:center;gap:.5rem">⚡ Quick Reception Hub</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <button class="btn-primary" onclick="Modals.newPatient()" style="height:unset;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:linear-gradient(135deg, var(--accent), var(--accent2))">
+            <span style="font-size:1.5rem">👤</span>
+            <span>Register New Patient</span>
+          </button>
+          <button class="btn-primary" onclick="Modals.newAppointment()" style="height:unset;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:linear-gradient(135deg, var(--green), #10b981)">
+            <span style="font-size:1.5rem">📅</span>
+            <span>Schedule Appointment</span>
+          </button>
+          <button class="btn-primary" onclick="App.page('patients')" style="height:unset;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:linear-gradient(135deg, var(--blue), #3b82f6)">
+            <span style="font-size:1.5rem">🔍</span>
+            <span>Search Records</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Schedule + Quick Actions -->
+      <div class="dash-main-grid">
+        <div class="card dash-schedule-card">
+          <div class="card-head">
+            <h3>Today's Schedule</h3>
+            <button class="btn-all" onclick="App.page('appointments')">ALL →</button>
+          </div>
+          <div class="table-scroll"><table class="data-table">
+            <thead><tr><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="dashSchedBody"></tbody>
+          </table></div>
+        </div>
+        <div class="card dash-quick-card">
+          <div class="card-head"><h3>Quick Actions</h3></div>
+          <div class="dash-qa-list">
+            <button class="dash-qa-btn" onclick="Modals.newPatient()"><span>👤</span>New Patient</button>
+            <button class="dash-qa-btn" onclick="Modals.newAppointment()"><span>📅</span>New Appointment</button>
+            <button class="dash-qa-btn" onclick="Modals.newTransaction()"><span>💳</span>Add Transaction</button>
+            <button class="dash-qa-btn" onclick="App.page('inventory')"><span>📦</span><span data-t="Inventory">Inventory</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue Trend Chart -->
+      <div class="card dash-revenue-card">
+        <div class="card-head"><h3>Revenue Trend (12 months)</h3></div>
+        <div class="dash-chart-wrap">
+          <canvas id="dashRevenueChart" height="120"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAITING ROOM -->
+    <section id="pg-waiting" class="page-content">
+      <!-- 3D Orb -->
+      <div class="orb3d-card">
+        <div class="orb3d-canvas-wrap" id="orb3dMount"></div>
+        <div class="orb3d-info">
+          <div class="orb3d-title">🔮 Queue Status</div>
+          <div class="orb3d-queue-count" id="orb3dCount">0</div>
+          <div class="orb3d-queue-label">patients waiting</div>
+          <div style="font-size:.75rem;color:var(--text3);margin-top:.5rem">Orb pulses faster &amp; turns red as queue grows</div>
+        </div>
+      </div>
+
+      <div class="page-bar">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <h2 style="color:var(--text)">🪑 Waiting Room</h2>
+          <span class="badge badge-urgent" id="waitingCount" style="font-size:1rem;padding:.25rem .75rem">0</span>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="WaitingPage.render()">↺ Refresh</button>
+          <button class="btn-ghost" onclick="WaitingPage.clearAll()" style="color:var(--red)">🗑 Clear All</button>
+          <button class="btn-icon" onclick="Modals.addPatientToQueue()">⏳ Add to Queue</button>
+          <button class="btn-primary" onclick="Modals.newPatient()">+ Register Patient</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>#</th><th>Patient</th><th>Arrived</th><th>Waiting</th><th>Actions</th></tr></thead>
+          <tbody id="waitingBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- PATIENTS -->
+    <section id="pg-patients" class="page-content" data-print-title="Patients">
+      <!-- 3D Jaw Chart -->
+      <div class="jaw3d-card">
+        <div class="jaw3d-header">
+          <span class="jaw3d-title">🦷 Interactive Jaw Chart — Click a tooth to view/add treatment</span>
+          <span class="jaw3d-hint">🖱 Drag to rotate · Click tooth to select</span>
+        </div>
+        <div id="jaw3dMount"></div>
+        <div class="jaw3d-selected-info" id="jaw3dInfo">Select a tooth to link a treatment record</div>
+      </div>
+
+      <div class="page-bar">
+        <input type="search" class="search-input" id="patientSearch" placeholder="🔍  Search patients…" oninput="Pages.patients.search(this.value)">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="Pages.patients.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.patients.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.patients.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="Modals.newPatient()">+ Register Patient</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Age</th><th>Gender</th><th>Insurance</th><th>Registered</th><th>Queue</th><th>Actions</th></tr></thead>
+          <tbody id="patientBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ABILITIES -->
+    <section id="pg-abilities" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">🎯 Doctor Abilities</h2>
+        <button class="btn-primary" onclick="AbilitiesPage.render()">↺ Refresh</button>
+      </div>
+      <p style="color:var(--text2);font-size:.88rem;margin-bottom:1.25rem">
+        Set which treatments each doctor is qualified to perform.
+        These abilities control doctor availability when booking appointments.
+      </p>
+      <div id="abilitiesGrid" class="doctors-grid"></div>
+    </section>
+
+    <!-- APPOINTMENTS -->
+    <section id="pg-appointments" class="page-content" data-print-title="Appointments">
+      <div class="page-bar">
+        <div class="filter-tabs" id="apptFilters">
+          <button class="ftab active" onclick="Pages.appointments.filter('all',this)">All</button>
+          <button class="ftab" onclick="Pages.appointments.filter('scheduled',this)">Scheduled</button>
+          <button class="ftab" onclick="Pages.appointments.filter('confirmed',this)">Confirmed</button>
+          <button class="ftab" onclick="Pages.appointments.filter('completed',this)">Completed</button>
+          <button class="ftab" onclick="Pages.appointments.filter('cancelled',this)">Cancelled</button>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="Pages.appointments.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.appointments.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.appointments.exportJson()">⬇ JSON</button>
+          <button class="btn-icon" onclick="AppointmentsPage.sendTodayReminders()" title="Send WhatsApp reminders for today's appointments">💬 Reminders</button>
+          <button class="btn-primary" onclick="Modals.newAppointment()">+ Schedule</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Treatment</th><th>Priority</th><th>Cost</th><th>Dr. Commission</th><th>Status</th><th>Discount</th><th>Actions</th></tr></thead>
+          <tbody id="apptBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- DOCTORS -->
+    <section id="pg-doctors" class="page-content" data-print-title="Medical Staff">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">Medical Staff</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="window.print()" title="Print">🖨️ Print</button>
+          <button class="btn-icon" onclick="Pages.doctors.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.doctors.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.doctors.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="Modals.addDoctor()">+ Add Doctor</button>
+        </div>
+      </div>
+      <!-- 3D Doctor Orrery -->
+      <div class="orrery3d-card">
+        <div class="orrery3d-header">
+          <span class="orrery3d-title">🪐 Doctor Activity Orrery — Planet size = patient load</span>
+          <span class="orrery3d-hint">🖱 Drag to rotate · Each planet = a doctor</span>
+        </div>
+        <div id="orreryMount"></div>
+      </div>
+
+      <div class="doctors-grid" id="doctorsGrid"></div>
+    </section>
+
+    <!-- FINANCE -->
+    <section id="pg-finance" class="page-content" data-print-title="Finance">
+      <!-- 3D Coin Stacks -->
+      <div class="coin3d-card">
+        <div class="coin3d-header">
+          <span class="coin3d-title">💰 Monthly Revenue — 3D View</span>
+          <span class="coin3d-hint">🖱 Drag to rotate · Stack height = revenue</span>
+        </div>
+        <div id="coin3dMount"></div>
+      </div>
+      <div class="page-bar">
+        <div class="filter-tabs" id="finFilters">
+          <button class="ftab active" onclick="Pages.finance.filter('all',this)">All</button>
+          <button class="ftab" onclick="Pages.finance.filter('income',this)">Income</button>
+          <button class="ftab" onclick="Pages.finance.filter('expense',this)">Expense</button>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="Pages.finance.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.finance.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.finance.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="Modals.newTransaction()">+ Transaction</button>
+        </div>
+      </div>
+      <div class="finance-summary" id="financeSummary"></div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th><th>Actions</th></tr></thead>
+          <tbody id="financeBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- INVENTORY -->
+    <section id="pg-inventory" class="page-content">
+      <!-- 3D Molecule -->
+      <div class="mol3d-card">
+        <div class="mol3d-canvas-wrap" id="mol3dMount"></div>
+        <div class="mol3d-info">
+          <div class="mol3d-title">⚗️ Inventory Categories</div>
+          <div style="font-size:.8rem;color:var(--text2);margin-bottom:.4rem">Each atom = a supply category. Drag to spin.</div>
+          <div class="mol3d-legend" id="mol3dLegend"></div>
+        </div>
+      </div>
+
+      <div class="page-bar">
+        <input type="search" class="search-input" id="invSearch" placeholder="🔍  Search inventory…" oninput="Pages.inventory.search(this.value)">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="Pages.inventory.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.inventory.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.inventory.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="Modals.addInventory()">+ Add Item</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Min Stock</th><th>Unit Price</th><th>Supplier</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="invBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="pg-services" class="page-content">
+      <div class="svc-kpi-row" id="svcStatsRow"></div>
+
+      <div class="page-bar">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <input type="search" class="search-input" id="svcSearch" placeholder="🔍  Search services…" oninput="ServicesPage.search(this.value)">
+          <div class="svc-filter-strip">
+            <button class="svc-filter-btn active" onclick="ServicesPage.filterCategory('all')">All</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('implant')">Implant</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('filling')">Filling</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('crown')">Crown</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('orthodontics')">Orthodontics</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('extraction')">Extraction</button>
+            <button class="svc-filter-btn" onclick="ServicesPage.filterCategory('cosmetic')">Cosmetic</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="ServicesPage.openCalculator()">🧮 Price Calculator</button>
+          <button class="btn-icon" onclick="ServicesPage.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="ServicesPage.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="ServicesPage.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="ServicesPage._addModal()">+ Add Service</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Service Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr></thead>
+          <tbody id="svcBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- EMPLOYMENT (Admin Only) -->
+    <section id="pg-employment" class="page-content">
+      <div id="empPayrollRow"></div>
+
+      <div class="page-bar">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <input type="search" class="search-input" id="empSearch" placeholder="🔍  Search employees…" oninput="EmploymentPage.search(this.value)">
+          <div class="svc-filter-strip">
+            <button class="emp-filter-btn active" onclick="EmploymentPage.filterDept('all')">All</button>
+            <button class="emp-filter-btn" onclick="EmploymentPage.filterDept('clinical')">Clinical</button>
+            <button class="emp-filter-btn" onclick="EmploymentPage.filterDept('administrative')">Admin</button>
+            <button class="emp-filter-btn" onclick="EmploymentPage.filterDept('inventory')"><span data-t="Inventory">Inventory</span></button>
+            <button class="emp-filter-btn" onclick="EmploymentPage.filterDept('finance')"><span data-t="Finance">Finance</span></button>
+            <button class="emp-filter-btn" onclick="EmploymentPage.filterDept('management')">Management</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="info-tag admin-only">Admin Only</div>
+          <button class="btn-icon" onclick="EmploymentPage.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="EmploymentPage.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="EmploymentPage.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="EmploymentPage._addModal()">+ Add Record</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Employee Name</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Hire Date</th>
+            <th>Status</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr></thead>
+          <tbody id="empBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- PASSWORDS (Admin Only) -->
+    <section id="pg-passwords" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">User Access Management</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="info-tag">Admin Only</div>
+          <button class="btn-icon" onclick="Pages.passwords.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.passwords.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.passwords.exportJson()">⬇ JSON</button>
+          <button class="btn-icon" onclick="PasswordsPage.checkResetRequests()" title="View pending password reset requests">🔑 Reset Requests</button>
+          <button class="btn-primary" onclick="Modals.newUser()">+ New User</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>User</th><th>Role</th><th>Password</th><th>Actions</th></tr></thead>
+          <tbody id="passwordBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section id="pg-calendar" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">🗓️ Calendar</h2>
+      </div>
+      <div id="calendarWrap" class="card" style="padding:1.5rem"></div>
+    </section>
+
+    <!-- TREATMENTS -->
+    <section id="pg-treatments" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)"><span data-t="Treatments">Treatments</span></h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <input type="text" placeholder="🔍 Search..." oninput="TreatmentsPage.search(this.value)"
+                 style="padding:.45rem .9rem;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm)">
+          <button class="btn-icon" onclick="TreatmentsPage.importFile()">⬆ Import Excel/JSON</button>
+          <button class="btn-icon" onclick="TreatmentsPage.exportExcel()">⬇ Export Excel</button>
+          <button class="btn-icon" onclick="TreatmentsPage.exportJson()">⬇ Export JSON</button>
+          <button class="btn-icon accent" onclick="TreatmentsPage._addModal()">+ Add Treatment</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Patient</th><th>Doctor</th><th>Treatment</th><th>Tooth</th><th>Date</th><th>Diagnosis</th><th>Cost</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="treatBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- MESSAGES (Admin Only) -->
+    <section id="pg-messages" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)"><span data-t="Messages">Messages</span></h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="Pages.messages.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.messages.exportJson()">⬇ JSON</button>
+          <button class="btn-ghost" onclick="Pages.messages.clearAll()">🗑 Clear All</button>
+        </div>
+      </div>
+      <div class="info-tag">Admin Only</div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>From</th><th>Request</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="messagesBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section id="pg-analytics" class="page-content">
+      <!-- KPI row -->
+      <div class="an-kpi-grid" id="anKpiGrid"></div>
+
+      <!-- 3D Bar Chart -->
+      <div class="bar3d-card">
+        <div class="bar3d-header">
+          <span class="bar3d-title">📊 Revenue — 3D View</span>
+          <div class="bar3d-toggle">
+            <button class="active" id="bar3dBtnRev" onclick="BarChart3D_switchRevenue()">Revenue</button>
+            <button id="bar3dBtnExp" onclick="BarChart3D_switchExpense()">Expenses</button>
+          </div>
+        </div>
+        <div id="bar3dMount"></div>
+      </div>
+
+      <!-- Revenue vs Expenses + Treatment Distribution -->
+      <div class="an-top-grid">
+        <div class="card">
+          <div class="card-head"><h3>Revenue vs Expenses</h3></div>
+          <div class="an-chart-wrap"><canvas id="anRevenueChart" height="180"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Treatment Distribution</h3></div>
+          <div class="an-donut-wrap"><canvas id="anDonutChart" height="220"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Doctor Performance -->
+      <div class="card" style="margin-top:1rem">
+        <div class="card-head"><h3>Doctor Performance — Patients</h3></div>
+        <div class="an-chart-wrap"><canvas id="anDoctorChart" height="160"></canvas></div>
+      </div>
+
+      <!-- Doctor Revenue -->
+      <div class="card" style="margin-top:1rem">
+        <div class="card-head"><h3>Doctor Performance — Revenue</h3></div>
+        <div class="an-chart-wrap"><canvas id="anDoctorRevChart" height="160"></canvas></div>
+      </div>
+
+      <!-- ── Feedback Analytics ── -->
+      <div class="card" style="margin-top:1rem" id="anFeedbackSection">
+        <div class="card-head">
+          <h3>⭐ Patient Feedback — Ratings by Doctor</h3>
+          <span id="anFeedbackTotal" style="color:var(--text3);font-size:.8rem"></span>
+        </div>
+        <div class="an-chart-wrap"><canvas id="anFeedbackChart" height="180"></canvas></div>
+      </div>
+
+      <!-- Feedback satisfaction donut -->
+      <div class="an-top-grid" style="margin-top:1rem">
+        <div class="card">
+          <div class="card-head"><h3>Overall Satisfaction Split</h3></div>
+          <div class="an-donut-wrap"><canvas id="anSatisfactionChart" height="220"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Rating Category Averages</h3></div>
+          <div class="an-chart-wrap"><canvas id="anRadarChart" height="220"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ FEEDBACK -->
+    <section id="pg-feedback" class="page-content">
+      <div class="fb-kpi-row an-kpi-grid" id="fbKpiRow"></div>
+      <div class="page-bar">
+        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+          <input class="search-input" id="fbSearch" placeholder="🔍  Search patient or doctor..." oninput="FeedbackPage.filter()" style="max-width:280px">
+          <select id="fbDoctorFilter" class="search-input" style="max-width:200px;border-radius:var(--radius-pill)" onchange="FeedbackPage.filter()">
+            <option value="">All Doctors</option>
+          </select>
+          <select id="fbRatingFilter" class="search-input" style="max-width:160px;border-radius:var(--radius-pill)" onchange="FeedbackPage.filter()">
+            <option value="">All Ratings</option>
+            <option value="5">★★★★★ 5 Stars</option>
+            <option value="4">★★★★ 4 Stars</option>
+            <option value="3">★★★ 3 Stars</option>
+            <option value="2">★★ 2 Stars</option>
+            <option value="1">★ 1 Star</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="FeedbackPage.openAdd()">＋ Add Feedback</button>
+      </div>
+      <div id="fbGrid" class="fb-grid"></div>
+    </section>
+
+    <!-- Add Feedback Modal -->
+    <div class="modal-overlay" id="fbModal">
+      <div class="modal modal-sm">
+        <div class="modal-head">
+          <h3>⭐ New Patient Feedback</h3>
+          <button class="close-btn" onclick="FeedbackPage.closeAdd()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Patient (optional)</label>
+              <select id="fbPatientSel"><option value="">— Anonymous —</option></select>
+            </div>
+            <div class="form-group">
+              <label>Doctor *</label>
+              <select id="fbDoctorSel"><option value="">Select doctor...</option></select>
+            </div>
+            <div class="form-group">
+              <label>Visit Date</label>
+              <input type="date" id="fbVisitDate">
+            </div>
+            <div class="form-group">
+              <label>Overall Experience *</label>
+              <div class="star-picker" data-field="fbOverall"></div>
+              <input type="hidden" id="fbOverall" value="0">
+            </div>
+            <div class="form-group">
+              <label>Waiting Time</label>
+              <div class="star-picker" data-field="fbWait"></div>
+              <input type="hidden" id="fbWait" value="0">
+            </div>
+            <div class="form-group">
+              <label>Doctor's Time &amp; Attention</label>
+              <div class="star-picker" data-field="fbDrTime"></div>
+              <input type="hidden" id="fbDrTime" value="0">
+            </div>
+            <div class="form-group">
+              <label>Clinic Cleanliness</label>
+              <div class="star-picker" data-field="fbClean"></div>
+              <input type="hidden" id="fbClean" value="0">
+            </div>
+            <div class="form-group full">
+              <label>Comment</label>
+              <textarea id="fbComment" placeholder="Patient's comments..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="FeedbackPage.closeAdd()">Cancel</button>
+          <button class="btn-primary" onclick="FeedbackPage.submit()">Save Feedback</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ WORK HOURS -->
+    <section id="pg-workhours" class="page-content">
+
+      <!-- KPIs -->
+      <div class="an-kpi-grid" id="whKpis"></div>
+
+      <!-- Toolbar -->
+      <div class="page-bar" style="margin-bottom:.75rem">
+        <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+          <!-- View tabs -->
+          <div class="wh-tabs">
+            <button class="wh-tab active" id="whTab-dashboard" onclick="WorkHoursPage.switchView('dashboard')">📊 Dashboard</button>
+            <button class="wh-tab" id="whTab-logs"      onclick="WorkHoursPage.switchView('logs')">📋 Logs</button>
+            <button class="wh-tab" id="whTab-summary"   onclick="WorkHoursPage.switchView('summary')">👥 Summary</button>
+          </div>
+          <input type="month" id="whMonthPick" class="search-input" style="max-width:180px" onchange="WorkHoursPage.changeMonth()">
+          <span id="whPeriodLabel" style="color:var(--text2);font-size:.85rem;font-weight:600"></span>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-ghost" onclick="WorkHoursPage.openManual()">✏️ Manual Entry</button>
+        </div>
+      </div>
+
+      <!-- ── Dashboard pane ── -->
+      <div id="whPane-dashboard">
+        <!-- Clock In/Out card -->
+        <div class="card wh-clock-card" style="margin-bottom:1rem">
+          <div class="card-head"><h3>🕐 Clock In / Clock Out</h3></div>
+          <div class="wh-clock-row">
+            <div class="form-group" style="flex:1;min-width:200px;margin:0">
+              <label>Employee</label>
+              <select id="whClockEmpSel" style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,0.82);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.9rem;outline:none"></select>
+            </div>
+            <div class="form-group" style="flex:1;min-width:140px;margin:0">
+              <label>Shift</label>
+              <select id="whClockShift" style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,0.82);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.9rem;outline:none">
+                <option value="morning">🌅 Morning</option>
+                <option value="afternoon">🌤 Afternoon</option>
+                <option value="evening">🌙 Evening</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:2;min-width:200px;margin:0">
+              <label>Notes (optional)</label>
+              <input type="text" id="whClockNotes" placeholder="e.g. working from home..." style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,0.82);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.9rem;outline:none">
+            </div>
+            <div class="wh-clock-btns">
+              <button class="wh-btn-in"  onclick="WorkHoursPage.clockIn()">▶ Clock In</button>
+              <button class="wh-btn-out" onclick="WorkHoursPage.clockOut()">■ Clock Out</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's attendance -->
+        <div class="card">
+          <div class="card-head"><h3>📋 Today's Attendance</h3><span id="whTodayDate" style="color:var(--text3);font-size:.8rem"></span></div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Employee</th><th>Department</th><th>Clock In</th><th>Clock Out</th><th>Hours</th><th>Status</th>
+              </tr></thead>
+              <tbody id="whTodayBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Logs pane ── -->
+      <div id="whPane-logs" style="display:none">
+        <div class="page-bar" style="margin-bottom:.75rem">
+          <input class="search-input" placeholder="🔍 Search employee…" oninput="WorkHoursPage.search(this.value)" style="max-width:280px">
+        </div>
+        <div class="card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Employee</th><th>Dept</th><th>Date</th><th>In</th><th>Out</th><th>Hours</th><th>Overtime</th><th>Status</th>
+              </tr></thead>
+              <tbody id="whLogsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Summary pane ── -->
+      <div id="whPane-summary" style="display:none">
+        <div class="card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Employee</th><th>Dept</th><th>Total Hours</th><th>Days</th><th>Overtime</th><th>Late</th><th>Last Seen</th>
+              </tr></thead>
+              <tbody id="whSummaryBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Manual Entry Modal -->
+    <div class="modal-overlay" id="whManualModal">
+      <div class="modal modal-sm">
+        <div class="modal-head">
+          <h3>✏️ Manual Work Hours Entry</h3>
+          <button class="close-btn" onclick="WorkHoursPage.closeManual()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Employee *</label>
+              <select id="whManualEmpSel"></select>
+            </div>
+            <div class="form-group">
+              <label>Work Date *</label>
+              <input type="date" id="whManualDate">
+            </div>
+            <div class="form-group">
+              <label>Shift</label>
+              <select id="whManualShift">
+                <option value="morning">🌅 Morning</option>
+                <option value="afternoon">🌤 Afternoon</option>
+                <option value="evening">🌙 Evening</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Clock In *</label>
+              <input type="time" id="whManualIn">
+            </div>
+            <div class="form-group">
+              <label>Clock Out *</label>
+              <input type="time" id="whManualOut">
+            </div>
+            <div class="form-group full">
+              <label>Notes</label>
+              <input type="text" id="whManualNotes" placeholder="Optional notes…">
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="WorkHoursPage.closeManual()">Cancel</button>
+          <button class="btn-primary" onclick="WorkHoursPage.submitManual()">Save Entry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ WHATSAPP BOT -->
+    <section id="pg-whatsappbot" class="page-content">
+
+      <!-- Status + action bar -->
+      <div class="wa-header-row">
+        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+          <span id="waBotStatusBadge" class="wa-status-badge wa-status-stopped">⏹ Stopped</span>
+          <!-- Mode toggle -->
+          <div class="wh-tabs" style="margin-left:.5rem">
+            <button class="wh-tab active" id="waModeSimpleBtn" onclick="WhatsAppBotPage.setMode('simple')">🔢 Simple Bot</button>
+            <button class="wh-tab"        id="waModeAiBtn"     onclick="WhatsAppBotPage.setMode('ai')">🧠 AI Bot</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-ghost"    id="waBotStopBtn"   onclick="WhatsAppBotPage.stopBot()"     disabled>⏹ Stop Bot</button>
+          <button class="btn-ghost"    id="waClearSessBtn" onclick="WhatsAppBotPage.clearSession()">🔄 New QR</button>
+          <button class="btn-primary"  id="waSaveBtn"      onclick="WhatsAppBotPage.save()">💾 Save Config</button>
+          <button class="btn-primary"  id="waBotStartBtn"  onclick="WhatsAppBotPage.startBot()"
+            style="background:linear-gradient(135deg,#38c9a0,#2dcfc8);box-shadow:0 5px 18px rgba(56,201,160,0.38)">▶ Start Bot</button>
+        </div>
+      </div>
+
+      <!-- QR code section (hidden until bot starts) -->
+      <div id="waQrSection" style="display:none;margin-bottom:1rem">
+        <div class="card" style="border-top:3px solid var(--green)">
+          <div class="card-head">
+            <h3>📱 Scan QR Code with WhatsApp</h3>
+            <span style="font-size:.78rem;color:var(--text2)">WhatsApp → Settings → Linked Devices → Link a Device</span>
+          </div>
+          <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;padding-top:.5rem">
+            <div id="waQrWrap" style="display:none;flex-direction:column;align-items:center;gap:.75rem">
+              <div style="background:#fff;padding:12px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.15)">
+                <img id="waQrImg" src="" alt="QR Code" style="width:220px;height:220px;display:block">
+              </div>
+              <div id="waQrHint" style="font-size:.78rem;color:var(--text2);text-align:center;max-width:240px;line-height:1.5"></div>
+            </div>
+            <div style="flex:1;min-width:220px">
+              <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.6rem">📋 Bot Log</div>
+              <pre id="waBotLog" style="font-size:.72rem;font-family:'Courier New',monospace;color:var(--green);
+                background:rgba(0,0,0,.55);border:1px solid rgba(56,201,160,.25);border-radius:8px;
+                padding:.75rem;max-height:180px;overflow-y:auto;white-space:pre-wrap;line-height:1.5">Waiting to start…</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main layout -->
+      <div class="wa-layout">
+
+        <!-- LEFT col -->
+        <div class="wa-settings-col">
+
+          <!-- AI Provider selector (shown in AI mode) -->
+          <div id="waAiSection" style="display:none" class="card wa-card">
+            <div class="card-head"><h3>🤖 AI Provider</h3><span style="font-size:.75rem;color:var(--text3)">Choose your AI + enter API key</span></div>
+            <div id="waProviderGrid" class="wa-provider-grid"></div>
+            <div class="form-group" style="margin-top:1rem">
+              <label id="waApiKeyLabel">API Key</label>
+              <div style="display:flex;gap:.5rem;align-items:center">
+                <input type="password" id="waApiKeyInput" placeholder="Paste your API key here…" style="flex:1">
+                <a id="waApiKeyLink" href="#" target="_blank" class="btn-ghost" style="font-size:.75rem;padding:.4rem .8rem;white-space:nowrap;text-decoration:none">🔑 Get Key</a>
+              </div>
+              <span class="hint" id="waApiKeyHint"></span>
+            </div>
+            <!-- AI system prompt -->
+            <div class="form-group" style="margin-top:.75rem">
+              <label>AI Personality / System Prompt</label>
+              <textarea id="waAiPrompt" rows="4" placeholder="You are a friendly dental clinic assistant…"></textarea>
+            </div>
+          </div>
+
+          <!-- Welcome message -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>👋 Welcome Message</h3></div>
+            <div class="form-group" style="margin:0 0 .75rem">
+              <label>Greeting trigger words</label>
+              <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem" id="waTriggerTags"></div>
+              <div style="display:flex;gap:.5rem">
+                <input class="search-input" id="waTriggerInput" placeholder="Add word… e.g. hello" style="flex:1"
+                  onkeydown="if(event.key==='Enter')WhatsAppBotPage.addTrigger()">
+                <button class="btn-ghost" onclick="WhatsAppBotPage.addTrigger()">＋</button>
+              </div>
+            </div>
+            <div class="form-group" style="margin:0">
+              <label>Welcome Message</label>
+              <textarea id="waWelcomeMsg" rows="7" oninput="WhatsAppBotPage.updatePreview()"
+                style="font-family:'Courier New',monospace;font-size:.82rem"></textarea>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div class="card wa-card">
+            <div class="card-head">
+              <h3>🦷 Services &amp; Prices</h3>
+              <button class="btn-ghost" style="font-size:.75rem;padding:.3rem .75rem" onclick="WhatsAppBotPage.addService()">＋ Add</button>
+            </div>
+            <div id="waBotServices" style="display:flex;flex-direction:column;gap:.5rem;padding-top:.25rem"></div>
+          </div>
+
+          <!-- Hours + info -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>🕐 Clinic Info</h3></div>
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Working Hours</label>
+                <textarea id="waWorkingHours" rows="3" oninput="WhatsAppBotPage.updatePreview()"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" id="waClinicAddress" oninput="WhatsAppBotPage.updatePreview()">
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="text" id="waClinicPhone" oninput="WhatsAppBotPage.updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Server connection -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>🌐 DentCare Server Connection</h3></div>
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Server URL</label>
+                <input type="text" id="waServerUrl" placeholder="http://localhost:3001">
+              </div>
+              <div class="form-group">
+                <label>Admin Username</label>
+                <input type="text" id="waAdminUser">
+              </div>
+              <div class="form-group">
+                <label>Admin Password</label>
+                <input type="password" id="waAdminPass">
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end left col -->
+
+        <!-- RIGHT col: preview + how-to -->
+        <div class="wa-preview-col">
+
+          <!-- Phone preview -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>📱 Live Preview</h3></div>
+            <div class="wa-phone-mock">
+              <div class="wa-phone-bar">
+                <div class="wa-phone-avatar">🦷</div>
+                <div>
+                  <div style="font-size:.82rem;font-weight:700;color:#fff">DentCare Clinic</div>
+                  <div style="font-size:.7rem;color:rgba(255,255,255,.55)">online</div>
+                </div>
+              </div>
+              <div class="wa-phone-body">
+                <div class="wa-bubble wa-bubble-in"  id="waPreviewBubble">Welcome message preview…</div>
+                <div class="wa-bubble wa-bubble-out" style="font-size:.78rem">3</div>
+                <div class="wa-bubble wa-bubble-in"  id="waPreviewServices" style="white-space:pre-line;font-size:.78rem"></div>
+                <div class="wa-bubble wa-bubble-out" style="font-size:.78rem">4</div>
+                <div class="wa-bubble wa-bubble-in"  id="waPreviewHours" style="white-space:pre-line;font-size:.78rem"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to use -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>🚀 How to Start</h3></div>
+            <div class="wa-steps">
+              <div class="wa-step">
+                <div class="wa-step-num">1</div>
+                <div>
+                  <div class="wa-step-title">Choose mode &amp; provider</div>
+                  <div class="wa-step-desc">Simple Bot needs no API key. AI Bot needs a Gemini, OpenAI, or Claude key.</div>
+                </div>
+              </div>
+              <div class="wa-step">
+                <div class="wa-step-num">2</div>
+                <div>
+                  <div class="wa-step-title">Enter API key &amp; save</div>
+                  <div class="wa-step-desc">Click <strong>💾 Save Config</strong> — this writes <code>ai.js</code>, <code>.env</code> and <code>bot-config.json</code> into your bot folder automatically.</div>
+                </div>
+              </div>
+              <div class="wa-step">
+                <div class="wa-step-num">3</div>
+                <div>
+                  <div class="wa-step-title">Click ▶ Start Bot</div>
+                  <div class="wa-step-desc">The server starts the bot process. A <strong>QR code appears right here</strong> in this page.</div>
+                </div>
+              </div>
+              <div class="wa-step">
+                <div class="wa-step-num">4</div>
+                <div>
+                  <div class="wa-step-title">Scan with WhatsApp</div>
+                  <div class="wa-step-desc">WhatsApp → <strong>Settings → Linked Devices → Link a Device</strong> → scan the QR above.</div>
+                  <div class="wa-qr-hint"><span style="font-size:1.3rem">📲</span><span>Point camera at QR above</span></div>
+                </div>
+              </div>
+              <div class="wa-step">
+                <div class="wa-step-num">5</div>
+                <div>
+                  <div class="wa-step-title">Bot is live 🎉</div>
+                  <div class="wa-step-desc">Anyone messaging the linked number gets automated replies. Appointments book directly into DentCare Pro!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick commands -->
+          <div class="card wa-card">
+            <div class="card-head"><h3>📋 Manual Commands</h3></div>
+            <div style="display:flex;flex-direction:column;gap:.4rem">
+              <div class="wa-code-block">cd dentist-bot-v5 &amp;&amp; npm install</div>
+              <div style="font-size:.72rem;color:var(--text3);margin-bottom:.4rem">Run once to install dependencies</div>
+              <div class="wa-code-block">node index.js</div>
+              <div style="font-size:.72rem;color:var(--text3);margin-bottom:.4rem">AI Bot (Gemini/OpenAI/Claude)</div>
+              <div class="wa-code-block">node bot.js</div>
+              <div style="font-size:.72rem;color:var(--text3)">Simple Menu Bot (no API key)</div>
+            </div>
+          </div>
+
+        </div><!-- end right col -->
+      </div><!-- end wa-layout -->
+    </section>
+
+        <!-- ════════════════════════════════════ IMAGING -->
+    <section id="pg-imaging" class="page-content">
+
+      <!-- KPIs -->
+      <div class="an-kpi-grid" id="imgKpis"></div>
+
+      <!-- Toolbar -->
+      <div class="page-bar" style="margin-bottom:.75rem">
+        <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+          <div class="wh-tabs">
+            <button class="wh-tab active" id="imgTab-gallery" onclick="ImagingPage.switchView('gallery')">🖼️ Gallery</button>
+            <button class="wh-tab"        id="imgTab-list"    onclick="ImagingPage.switchView('list')">📋 List</button>
+          </div>
+          <input class="search-input" id="imgSearch" placeholder="🔍 Search patient, diagnosis…" oninput="ImagingPage.searchImages()" style="max-width:260px">
+        </div>
+        <button class="btn-primary" onclick="ImagingPage.openUpload()">📤 Upload Image</button>
+      </div>
+
+      <!-- Modality filter tabs -->
+      <div id="imgModalityTabs" class="filter-tabs" style="margin-bottom:1rem"></div>
+
+      <!-- Gallery pane -->
+      <div id="imgPane-gallery">
+        <div id="imgGallery" class="img-gallery-grid"></div>
+      </div>
+
+      <!-- List pane -->
+      <div id="imgPane-list" style="display:none">
+        <div class="card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Patient</th><th>Modality</th><th>Tooth</th>
+                <th>Diagnosis</th><th>Notes</th><th>Tags</th><th>View</th><th>Actions</th>
+              </tr></thead>
+              <tbody id="imgListBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Image Viewer Overlay ── -->
+    <div class="modal-overlay" id="imgViewerOverlay" style="align-items:stretch;padding:0">
+      <div class="img-viewer-modal">
+        <div class="img-viewer-header">
+          <h3 id="imgViewerTitle" style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text)"></h3>
+          <button class="close-btn" onclick="ImagingPage.closeViewer()">✕</button>
+        </div>
+        <div class="img-viewer-body">
+          <div id="imgViewerFrame" class="img-viewer-frame"></div>
+          <div class="img-viewer-sidebar">
+            <div class="img-viewer-info-card">
+              <div class="img-vi-row"><span class="img-vi-label">Patient</span><span id="imgViewerPatient"></span></div>
+              <div class="img-vi-row"><span class="img-vi-label">Date</span><span id="imgViewerDate"></span></div>
+              <div class="img-vi-row"><span class="img-vi-label">Tooth</span><span id="imgViewerTooth"></span></div>
+              <div class="img-vi-row"><span class="img-vi-label">Diagnosis</span><span id="imgViewerDiag" style="color:var(--accent);font-weight:500"></span></div>
+              <div class="img-vi-row"><span class="img-vi-label">Notes</span><span id="imgViewerNotes" style="color:var(--text2);font-size:.82rem"></span></div>
+              <div class="img-vi-row"><span class="img-vi-label">Tags</span><span id="imgViewerTags"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Upload / Edit Modal ── -->
+    <div class="modal-overlay" id="imgUploadModal">
+      <div class="modal modal-xl">
+        <div class="modal-head">
+          <h3 id="imgModalTitle">📤 Upload Diagnostic Image</h3>
+          <button class="close-btn" onclick="ImagingPage.closeUploadModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Patient *</label>
+              <select id="imgModalPatient"></select>
+            </div>
+            <div class="form-group">
+              <label>Modality / Type *</label>
+              <select id="imgModalModality"></select>
+            </div>
+            <div class="form-group">
+              <label>Date *</label>
+              <input type="date" id="imgModalDate">
+            </div>
+            <div class="form-group">
+              <label>Body Part / Region</label>
+              <input type="text" id="imgModalBodyPart" placeholder="e.g. Upper Left Molar, Full Arch…">
+            </div>
+            <div class="form-group">
+              <label>Tooth Number(s)</label>
+              <input type="text" id="imgModalTooth" placeholder="e.g. 16, 17 or 16-18">
+            </div>
+            <div class="form-group">
+              <label>Diagnosis / Findings</label>
+              <input type="text" id="imgModalDiag" placeholder="e.g. Periapical abscess, Caries…">
+            </div>
+            <div class="form-group full">
+              <label>Upload File</label>
+              <div class="img-upload-drop" onclick="document.getElementById('imgFileInput').click()">
+                <input type="file" id="imgFileInput" accept="image/*,.dcm,.pdf" style="display:none"
+                  onchange="ImagingPage.handleFile(this)">
+                <div id="imgFilePreview">
+                  <div style="font-size:2.5rem;margin-bottom:.5rem">📁</div>
+                  <div style="font-size:.85rem;color:var(--text2)">Click to upload or drag &amp; drop</div>
+                  <div style="font-size:.75rem;color:var(--text3);margin-top:.25rem">JPEG, PNG, DICOM, PDF</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label>Or Image URL</label>
+              <input type="text" id="imgModalUrl" placeholder="https://… or leave blank if uploading file">
+            </div>
+            <div class="form-group full">
+              <label>Clinical Notes</label>
+              <textarea id="imgModalNotes" placeholder="Clinical observations, treatment notes…"></textarea>
+            </div>
+            <div class="form-group full">
+              <label>Tags (comma separated)</label>
+              <input type="text" id="imgModalTags" placeholder="e.g. follow-up, urgent, pre-treatment">
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="ImagingPage.closeUploadModal()">Cancel</button>
+          <button class="btn-primary" onclick="ImagingPage.saveImage()">💾 Save Image</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ INSURANCE -->
+    <section id="pg-insurance" class="page-content">
+
+      <!-- KPIs -->
+      <div class="an-kpi-grid" id="insKpis"></div>
+
+      <!-- Toolbar -->
+      <div class="page-bar" style="margin-bottom:.75rem">
+        <div class="wh-tabs">
+          <button class="wh-tab active" id="insTab-companies" onclick="InsurancePage.switchView('companies')">🏥 Companies</button>
+          <button class="wh-tab"        id="insTab-policies"  onclick="InsurancePage.switchView('policies')">📋 Policies</button>
+          <button class="wh-tab"        id="insTab-claims"    onclick="InsurancePage.switchView('claims')">📄 Claims</button>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="insToolbarBtns">
+          <button class="btn-primary" id="insBtnAdd" onclick="InsurancePage.openAddCompany()">＋ Add Company</button>
+        </div>
+      </div>
+
+      <!-- ── Companies pane ── -->
+      <div id="insPane-companies">
+        <div class="page-bar" style="margin-bottom:.75rem">
+          <input class="search-input" id="insCoSearch" placeholder="🔍 Search companies…" oninput="InsurancePage.filterCompanies()" style="max-width:280px">
+        </div>
+        <div id="insCoGrid" class="ins-co-grid"></div>
+      </div>
+
+      <!-- ── Policies pane ── -->
+      <div id="insPane-policies" style="display:none">
+        <div class="page-bar" style="margin-bottom:.75rem">
+          <span style="color:var(--text2);font-size:.85rem">All insurance policies</span>
+          <button class="btn-primary" onclick="InsurancePage.openAddPolicy()">＋ Add Policy</button>
+        </div>
+        <div class="card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Policy No.</th><th>Patient</th><th>Company</th>
+                <th>Coverage %</th><th>Max Benefit</th><th>Expiry</th>
+                <th>Status</th><th>Actions</th>
+              </tr></thead>
+              <tbody id="insPoliciesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Claims pane ── -->
+      <div id="insPane-claims" style="display:none">
+        <div class="page-bar" style="margin-bottom:.75rem">
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+            <input class="search-input" id="insClaimSearch" placeholder="🔍 Search claims…" oninput="InsurancePage.filterClaims()" style="max-width:240px">
+            <select id="insClaimStatusFilter" class="search-input" style="max-width:160px;border-radius:var(--radius-pill)" onchange="InsurancePage.filterClaims()">
+              <option value="">All Status</option>
+              <option value="pending">⏳ Pending</option>
+              <option value="submitted">📤 Submitted</option>
+              <option value="approved">✅ Approved</option>
+              <option value="paid">💰 Paid</option>
+              <option value="rejected">❌ Rejected</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="InsurancePage.openAddClaim()">＋ New Claim</button>
+        </div>
+        <div class="card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Date</th><th>Patient</th><th>Doctor</th><th>Company</th>
+                <th>Service</th><th>Claimed</th><th>Approved</th><th>Status</th><th>Actions</th>
+              </tr></thead>
+              <tbody id="insClaimsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Insurance Company Modal -->
+    <div class="modal-overlay" id="insCoModal">
+      <div class="modal">
+        <div class="modal-head">
+          <h3 id="insCoModalTitle">🏥 Add Insurance Company</h3>
+          <button class="close-btn" onclick="InsurancePage.closeCoModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group full"><label>Company Name *</label><input type="text" id="insCoName" placeholder="e.g. Medico Insurance Co."></div>
+            <div class="form-group"><label>Company Code</label><input type="text" id="insCoCode" placeholder="e.g. MIC-001"></div>
+            <div class="form-group"><label>Status</label>
+              <select id="insCoStatus"><option value="active">✅ Active</option><option value="inactive">⏸️ Inactive</option></select>
+            </div>
+            <div class="form-group"><label>Contact Person</label><input type="text" id="insCoContact" placeholder="Name"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="insCoPHone" placeholder="+20…"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="insCoEmail" placeholder="contact@company.com"></div>
+            <div class="form-group"><label>Brand Color</label><input type="color" id="insCoColor" value="#5b6cf9" style="height:42px;padding:.3rem"></div>
+            <div class="form-group full"><label>Address</label><input type="text" id="insCoAddress" placeholder="Full address…"></div>
+            <div class="form-group full"><label>Coverage Types</label><input type="text" id="insCoCoverage" placeholder="e.g. Dental, Oral Surgery, Orthodontics…"></div>
+            <div class="form-group full"><label>Notes</label><textarea id="insCoNotes" placeholder="Additional notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="InsurancePage.closeCoModal()">Cancel</button>
+          <button class="btn-primary" onclick="InsurancePage.saveCo()">💾 Save Company</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insurance Policy Modal -->
+    <div class="modal-overlay" id="insPolModal">
+      <div class="modal">
+        <div class="modal-head">
+          <h3 id="insPolModalTitle">📋 Add Policy</h3>
+          <button class="close-btn" onclick="InsurancePage.closePolModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Company *</label><select id="polCompanySel"></select></div>
+            <div class="form-group"><label>Patient</label><select id="polPatientSel"></select></div>
+            <div class="form-group"><label>Policy Number *</label><input type="text" id="polNumber" placeholder="e.g. POL-2026-001"></div>
+            <div class="form-group"><label>Status</label>
+              <select id="polStatus"><option value="active">✅ Active</option><option value="suspended">⏸️ Suspended</option><option value="cancelled">❌ Cancelled</option></select>
+            </div>
+            <div class="form-group"><label>Coverage %</label><input type="number" id="polCoverPct" min="0" max="100" step="0.5" placeholder="e.g. 80"></div>
+            <div class="form-group"><label>Max Annual Benefit</label><input type="number" id="polMaxBenefit" min="0" placeholder="e.g. 50000"></div>
+            <div class="form-group"><label>Deductible</label><input type="number" id="polDeductible" min="0" placeholder="e.g. 500"></div>
+            <div class="form-group"><label>Start Date</label><input type="date" id="polStartDate"></div>
+            <div class="form-group"><label>End Date</label><input type="date" id="polEndDate"></div>
+            <div class="form-group full"><label>Coverage Types</label><input type="text" id="polCoverTypes" placeholder="e.g. Crowns, Fillings, Root Canal…"></div>
+            <div class="form-group full"><label>Notes</label><textarea id="polNotes" placeholder="Additional notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="InsurancePage.closePolModal()">Cancel</button>
+          <button class="btn-primary" onclick="InsurancePage.savePol()">💾 Save Policy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insurance Claim Modal -->
+    <div class="modal-overlay" id="insClaimModal">
+      <div class="modal modal-xl">
+        <div class="modal-head">
+          <h3 id="insClaimModalTitle">📄 New Insurance Claim</h3>
+          <button class="close-btn" onclick="InsurancePage.closeClaimModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Company *</label><select id="claimCompanySel"></select></div>
+            <div class="form-group"><label>Policy</label><select id="claimPolicySel"></select></div>
+            <div class="form-group"><label>Patient</label><select id="claimPatientSel"></select></div>
+            <div class="form-group"><label>Doctor</label><select id="claimDoctorSel"></select></div>
+            <div class="form-group"><label>Treatment Date</label><input type="date" id="claimDate"></div>
+            <div class="form-group"><label>Diagnosis Code</label><input type="text" id="claimDiag" placeholder="e.g. K02.1"></div>
+            <div class="form-group"><label>Claimed Amount *</label><input type="number" id="claimAmount" min="0" step="0.01" placeholder="0.00"></div>
+            <div class="form-group"><label>Approved Amount</label><input type="number" id="claimApprovedAmt" min="0" step="0.01" placeholder="0.00"></div>
+            <div class="form-group"><label>Status</label>
+              <select id="claimStatus">
+                <option value="pending">⏳ Pending</option>
+                <option value="submitted">📤 Submitted</option>
+                <option value="approved">✅ Approved</option>
+                <option value="paid">💰 Paid</option>
+                <option value="rejected">❌ Rejected</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Rejection Reason</label><input type="text" id="claimRejectReason" placeholder="If rejected…"></div>
+            <div class="form-group full"><label>Service Description</label><textarea id="claimService" placeholder="Describe the dental service provided…"></textarea></div>
+            <div class="form-group full"><label>Notes</label><textarea id="claimNotes" placeholder="Additional notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="InsurancePage.closeClaimModal()">Cancel</button>
+          <button class="btn-primary" onclick="InsurancePage.saveClaim()">💾 Save Claim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <!-- ════════════════════════════════════ BULK EXPENSE -->
+    <section id="pg-bulkexpense" class="page-content">
+
+      <!-- KPIs -->
+      <div class="an-kpi-grid" id="beKpis"></div>
+
+      <!-- Toolbar -->
+      <div class="page-bar" style="margin-bottom:.75rem">
+        <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+          <div class="wh-tabs">
+            <button class="wh-tab active" id="beTab-builder" onclick="BulkExpensePage.switchView('builder')">💳 Expense Builder</button>
+            <button class="wh-tab" id="beTab-history"        onclick="BulkExpensePage.switchView('history')">📋 Submitted Batches</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-ghost" onclick="BulkExpensePage.importTemplate()" title="Download CSV template">⬇ Template</button>
+          <label class="btn-ghost" style="cursor:pointer" title="Import from CSV">
+            ⬆ Import CSV
+            <input type="file" accept=".csv" style="display:none" onchange="BulkExpensePage.importCSV(this.files[0])">
+          </label>
+          <button class="btn-ghost" onclick="BulkExpensePage.fillFromSalaries()">👥 Fill from Salaries</button>
+          <button class="btn-ghost" onclick="BulkExpensePage.fillFromLabOrders()">🧪 Fill from Lab Orders</button>
+        </div>
+      </div>
+
+      <!-- Builder pane -->
+      <div id="bePane-builder">
+        <div class="be-layout">
+
+          <!-- Main table card -->
+          <div class="card be-table-card">
+            <div class="card-head">
+              <h3>📋 Expense Rows</h3>
+              <div style="display:flex;gap:.5rem">
+                <button class="btn-ghost" style="font-size:.78rem;padding:.35rem .8rem" onclick="BulkExpensePage.clearAll()">🗑 Clear All</button>
+                <button class="btn-primary" style="font-size:.82rem;padding:.4rem 1rem" onclick="BulkExpensePage.addRow()">＋ Add Row</button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table be-table">
+                <thead><tr>
+                  <th style="min-width:200px">Description *</th>
+                  <th style="min-width:170px">Category</th>
+                  <th style="min-width:120px">Amount *</th>
+                  <th style="min-width:140px">Date</th>
+                  <th style="min-width:140px">Payment Method</th>
+                  <th style="min-width:160px">Notes</th>
+                  <th style="width:50px"></th>
+                </tr></thead>
+                <tbody id="beTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Summary sidebar -->
+          <div class="be-sidebar">
+            <!-- Total card -->
+            <div class="card be-total-card">
+              <div class="be-total-label">Total Expense</div>
+              <div class="be-total-amount" id="beTotalAmount">EGP 0.00</div>
+              <div class="be-total-count" id="beTotalCount">0 items</div>
+            </div>
+
+            <!-- Category breakdown -->
+            <div class="card">
+              <div class="card-head"><h3>📊 By Category</h3></div>
+              <div id="beBreakdown" style="display:flex;flex-direction:column;gap:.4rem;padding-top:.25rem"></div>
+            </div>
+
+            <!-- Submit -->
+            <button class="be-submit-btn" id="beSubmitBtn" onclick="BulkExpensePage.submitAll()">
+              ✅ Submit All Expenses
+            </button>
+            <div style="font-size:.72rem;color:var(--text3);text-align:center;margin-top:.4rem;line-height:1.5">
+              All rows will be saved as expense transactions in Finance. Incomplete rows are skipped.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- History pane -->
+      <div id="bePane-history" style="display:none">
+        <div id="beHistory"></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════════════════════════ SUPPLIERS -->
+    <section id="pg-suppliers" class="page-content">
+      <div class="an-kpi-grid" id="supKpis"></div>
+      <div class="page-bar">
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+          <input class="search-input" id="supSearch" placeholder="🔍 Search suppliers…" oninput="SuppliersPage.filter()" style="max-width:260px">
+          <select id="supCatFilter" class="search-input" style="max-width:180px;border-radius:var(--radius-pill)" onchange="SuppliersPage.filter()">
+            <option value="">All Categories</option>
+            <option value="general">General</option>
+            <option value="dental materials">Dental Materials</option>
+            <option value="equipment">Equipment</option>
+            <option value="lab">Lab</option>
+            <option value="pharmaceuticals">Pharmaceuticals</option>
+            <option value="consumables">Consumables</option>
+            <option value="other">Other</option>
+          </select>
+          <select id="supStatusFilter" class="search-input" style="max-width:140px;border-radius:var(--radius-pill)" onchange="SuppliersPage.filter()">
+            <option value="">All Status</option>
+            <option value="active">✅ Active</option>
+            <option value="inactive">⏸️ Inactive</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="SuppliersPage.openAdd()">＋ Add Supplier</button>
+      </div>
+      <div id="supGrid" class="sup-grid"></div>
+    </section>
+
+    <!-- Supplier Modal -->
+    <div class="modal-overlay" id="supModal">
+      <div class="modal">
+        <div class="modal-head">
+          <h3 id="supModalTitle">🏢 Add Supplier</h3>
+          <button class="close-btn" onclick="SuppliersPage.closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group full"><label>Supplier Name *</label><input type="text" id="supName" placeholder="e.g. DentaTech Co."></div>
+            <div class="form-group"><label>Contact Person</label><input type="text" id="supContact" placeholder="Name"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="supPhone" placeholder="+20…"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="supEmail" placeholder="email@example.com"></div>
+            <div class="form-group"><label>Category</label><select id="supCategory"></select></div>
+            <div class="form-group"><label>Payment Terms</label><input type="text" id="supPayTerms" placeholder="e.g. Net 30, Cash on delivery"></div>
+            <div class="form-group"><label>Status</label>
+              <select id="supStatus"><option value="active">✅ Active</option><option value="inactive">⏸️ Inactive</option></select>
+            </div>
+            <div class="form-group full"><label>Address</label><input type="text" id="supAddress" placeholder="Full address…"></div>
+            <div class="form-group full"><label>Notes</label><textarea id="supNotes" placeholder="Any additional notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="SuppliersPage.closeModal()">Cancel</button>
+          <button class="btn-primary" onclick="SuppliersPage.save()">💾 Save Supplier</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ LAB ORDERS -->
+    <section id="pg-laborders" class="page-content">
+      <div class="an-kpi-grid" id="labKpis"></div>
+      <div class="page-bar">
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+          <input class="search-input" id="labSearch" placeholder="🔍 Search orders…" oninput="LabOrdersPage.filter()" style="max-width:240px">
+          <select id="labStatusFilter" class="search-input" style="max-width:160px;border-radius:var(--radius-pill)" onchange="LabOrdersPage.filter()">
+            <option value="">All Status</option>
+          </select>
+          <select id="labPriorityFilter" class="search-input" style="max-width:150px;border-radius:var(--radius-pill)" onchange="LabOrdersPage.filter()">
+            <option value="">All Priority</option>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="urgent">🔥 Urgent</option>
+            <option value="emergency">🚨 Emergency</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="LabOrdersPage.openAdd()">＋ New Lab Order</button>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead><tr>
+              <th>Lab Type / Description</th>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Supplier / Lab</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Due Date</th>
+              <th>Cost</th>
+              <th>Actions</th>
+            </tr></thead>
+            <tbody id="labTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Order Modal -->
+    <div class="modal-overlay" id="labModal">
+      <div class="modal modal-xl">
+        <div class="modal-head">
+          <h3 id="labModalTitle">🧪 New Lab Order</h3>
+          <button class="close-btn" onclick="LabOrdersPage.closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Lab Work Type *</label><select id="labType"></select></div>
+            <div class="form-group"><label>Priority</label><select id="labPriority"></select></div>
+            <div class="form-group"><label>Doctor *</label><select id="labDoctor"></select></div>
+            <div class="form-group"><label>Patient</label><select id="labPatient"></select></div>
+            <div class="form-group"><label>Supplier / Lab</label><select id="labSupplier"></select></div>
+            <div class="form-group"><label>Status</label><select id="labStatus"></select></div>
+            <div class="form-group"><label>Shade / Color</label><input type="text" id="labShade" placeholder="e.g. A2, BL2…"></div>
+            <div class="form-group"><label>Cost</label><input type="number" id="labCost" placeholder="0.00" min="0" step="0.01"></div>
+            <div class="form-group"><label>Due Date</label><input type="date" id="labDueDate"></div>
+            <div class="form-group"><label>Sent to Lab Date</label><input type="date" id="labSentDate"></div>
+            <div class="form-group full"><label>Received Date</label><input type="date" id="labReceivedDate"></div>
+            <div class="form-group full"><label>Description</label><textarea id="labDescription" placeholder="Detailed description of the lab work…"></textarea></div>
+            <div class="form-group full"><label>Notes</label><textarea id="labNotes" placeholder="Additional notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-ghost" onclick="LabOrdersPage.closeModal()">Cancel</button>
+          <button class="btn-primary" onclick="LabOrdersPage.save()">💾 Save Lab Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS (original) -->
+    <section id="pg-settings" class="page-content" data-print-title="Settings">
+      <div class="page-bar">
+        <h2 style="color:var(--text)"><span data-t="Settings">Settings</span></h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-icon" onclick="EmailReports.generate()" title="Send Monthly Report via Email">📧 Email Report</button>
+          <button class="btn-icon" onclick="window.print()" title="Print this page">🖨️ Print</button>
+        </div>
+      </div>
+      <!-- Settings Tabs (Page Access tab is admin-only) -->
+      <div class="settings-tabs">
+        <button class="settings-tab active" data-tab="general" onclick="SettingsPage.switchTab('general')">⚙️ General</button>
+        <button class="settings-tab admin-only" data-tab="page-access" onclick="SettingsPage.switchTab('page-access')">🔐 Page Access</button>
+      </div>
+      <div id="settingsWrap" class="settings-tab-pane active"></div>
+      <div id="settingsPageAccess" class="settings-tab-pane"></div>
+    </section>
+
+    <!-- BACKUP (Admin Only) -->
+    <section id="pg-backup" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">💾 Backup & Restore</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="info-tag">Admin Only</div>
+          <button class="btn-primary" onclick="BackupPage.createNow()">+ Create Backup Now</button>
+        </div>
+      </div>
+
+      <!-- Status Cards -->
+      <div id="backupStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem"></div>
+
+      <!-- Backup List -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+          <h3 style="color:var(--text)">All Backups</h3>
+          <button class="btn-icon" onclick="BackupPage.render()">↺ Refresh</button>
+        </div>
+        <div class="table-scroll"><table class="data-table">
+          <thead>
+            <tr>
+              <th>Backup Name</th>
+              <th>Created</th>
+              <th>Label</th>
+              <th>Folders</th>
+              <th>DB Size</th>
+              <th>Total Size</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="backupBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- DISCOUNT CODES (Admin Only) -->
+    <section id="pg-discount_codes" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">🏷 Discount Codes</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="info-tag">Admin Only</div>
+          <button class="btn-icon" onclick="Pages.discount_codes.importFile()">⬆ Import</button>
+          <button class="btn-icon" onclick="Pages.discount_codes.exportExcel()">⬇ Excel</button>
+          <button class="btn-icon" onclick="Pages.discount_codes.exportJson()">⬇ JSON</button>
+          <button class="btn-primary" onclick="Modals.newDiscountCode()">+ Add Code</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Description</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="discountBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- COMMISSIONS -->
+    <section id="pg-commissions" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">📊 Doctor Commission Report</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <select id="cm_doctor" onchange="CommissionsPage.filter()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .6rem">
+            <option value="">All Doctors</option>
+          </select>
+          <select id="cm_year" onchange="CommissionsPage.filter()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .6rem">
+            <option value="">All Years</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+          </select>
+          <select id="cm_month" onchange="CommissionsPage.filter()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .6rem">
+            <option value="">All Months</option>
+            <option value="01">January / يناير</option><option value="02">February / فبراير</option>
+            <option value="03">March / مارس</option><option value="04">April / أبريل</option>
+            <option value="05">May / مايو</option><option value="06">June / يونيو</option>
+            <option value="07">July / يوليو</option><option value="08">August / أغسطس</option>
+            <option value="09">September / سبتمبر</option><option value="10">October / أكتوبر</option>
+            <option value="11">November / نوفمبر</option><option value="12">December / ديسمبر</option>
+          </select>
+          <button class="btn-icon" onclick="CommissionsPage.exportExcel()">📥 Export Excel</button>
+          <button class="btn-icon" onclick="CommissionsPage.printReport()">🖨 Print Report</button>
+        </div>
+      </div>
+      <!-- Summary cards -->
+      <div id="commissionSummaryCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem"></div>
+      <div class="card" style="overflow-x:auto">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Doctor</th><th><span data-t="Treatments">Treatments</span></th><th>Revenue Generated</th><th>Commission %</th><th>Commission Earned</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="commissionBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- INSTALLMENTS / PAYMENT PLANS -->
+    <section id="pg-installments" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">💳 Payment Plans / الأقساط</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <input type="search" id="installSearch" placeholder="🔍 Search patient…"
+                 oninput="InstallmentsPage.search(this.value)"
+                 style="padding:.45rem .9rem;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm)">
+          <button class="btn-primary" onclick="InstallmentsPage.openNew()">+ New Plan</button>
+        </div>
+      </div>
+      <div class="card" style="overflow-x:auto">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Patient</th><th>Total Amount</th><th>Installments</th><th>Paid</th><th>Remaining</th><th>Progress</th><th>Status</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="installBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- RECIP — Receipt Manager -->
+    <section id="pg-recip" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">🧾 Receipts / الإيصالات</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <input type="search" id="recipSearch" placeholder="🔍 Search patient, treatment…"
+                 oninput="RecipPage.search(this.value)"
+                 style="padding:.45rem .9rem;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm)">
+          <button class="btn-icon" onclick="RecipPage.render()">↺ Refresh</button>
+        </div>
+      </div>
+      <div class="card" style="overflow-x:auto">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Treatment</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr></thead>
+          <tbody id="recipBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- PRESCRIPTION — Prescription Manager -->
+    <section id="pg-prescription" class="page-content">
+      <div class="page-bar">
+        <h2 style="color:var(--text)">℞ Prescriptions / الوصفات</h2>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <input type="search" id="prescSearch" placeholder="🔍 Search patient, medication…"
+                 oninput="PrescriptionPage.search(this.value)"
+                 style="padding:.45rem .9rem;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm)">
+          <label style="display:flex;align-items:center;gap:.35rem;font-size:.85rem;color:var(--text);cursor:pointer">
+            <input type="checkbox" id="prescShowAll" onchange="PrescriptionPage.toggleAll(this.checked)"
+                   style="accent-color:var(--accent)">
+            Show all treatments
+          </label>
+          <button class="btn-icon" onclick="PrescriptionPage.render()">↺ Refresh</button>
+        </div>
+      </div>
+      <div class="card" style="overflow-x:auto">
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Treatment</th>
+            <th>Date</th>
+            <th>Prescription</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr></thead>
+          <tbody id="prescBody"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="modalOverlay" class="modal-overlay" onclick="Modals.close(event)">
+
+  <!-- NEW PATIENT -->
+  <div id="modalNewPatient" class="modal" style="display:none">
+    <div class="modal-head"><h3>🦷 Register New Patient</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <!-- Tab Bar -->
+      <div class="np-tabs">
+        <button class="np-tab active" onclick="Modals._npTab('info',this)">👤 Patient Info</button>
+        <button class="np-tab" onclick="Modals._npTab('xray',this)">🩻 X-Ray Upload</button>
+      </div>
+
+      <!-- Tab: Info -->
+      <div id="npTabInfo" class="np-tab-panel active">
+        <div class="form-grid">
+          <div class="form-group"><label>Full Name *</label><input id="np_name" placeholder="Patient full name"></div>
+          <div class="form-group"><label>Phone *</label><input id="np_phone" placeholder="Phone number"></div>
+          <div class="form-group"><label>Date of Birth</label><input id="np_dob" type="date"></div>
+          <div class="form-group"><label>Gender</label><select id="np_gender"><option value="">Select</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+          <div class="form-group"><label>Email</label><input id="np_email" type="email" placeholder="Email address"></div>
+          <div class="form-group"><label>Occupation</label><input id="np_occupation" placeholder="Job title"></div>
+          <div class="form-group"><label>Blood Type</label><select id="np_blood"><option value="">Unknown</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+          <div class="form-group"><label>Insurance</label><input id="np_insurance" placeholder="Insurance provider"></div>
+          <div class="form-group"><label>Referral Source</label><select id="np_ref"><option value="">Select</option><option>Google</option><option>Social Media</option><option>Friend/Family</option><option>Doctor Referral</option><option>Walk-in</option></select></div>
+          <div class="form-group"><label>Payment Method</label><select id="np_pay"><option value="cash">Cash</option><option value="card">Card</option><option value="insurance">Insurance</option><option value="installment">Installment</option></select></div>
+          <div class="form-group full"><label>Medical Conditions</label><input id="np_conditions" placeholder="e.g. Diabetes, Hypertension"></div>
+          <div class="form-group full"><label>Allergies</label><input id="np_allergies" placeholder="e.g. Penicillin, Latex"></div>
+          <div class="form-group full"><label>Dental Concerns</label><input id="np_concerns" placeholder="Main dental concerns"></div>
+          <div class="form-group full"><label>Address</label><input id="np_address" placeholder="Home address"></div>
+        </div>
+      </div>
+
+      <!-- Tab: X-Ray -->
+      <div id="npTabXray" class="np-tab-panel" style="display:none">
+        <div class="xray-upload-area" id="xrayDropZone"
+             onclick="document.getElementById('xrayFileInp').click()"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="event.preventDefault();this.classList.remove('drag-over');Modals._handleXrayDrop(event)">
+          <div id="xrayPreviewWrap" style="display:none">
+            <img id="xrayPreviewImg" style="max-width:100%;max-height:320px;border-radius:8px;object-fit:contain">
+            <div class="xray-remove-btn" onclick="event.stopPropagation();Modals._clearXray()">✕ Remove</div>
+          </div>
+          <div id="xrayUploadPrompt">
+            <div style="font-size:3rem">🩻</div>
+            <p style="color:var(--text2);margin:.5rem 0">Click or drag &amp; drop X-ray image here</p>
+            <small style="color:var(--text-muted,var(--text2))">Supports JPG, PNG, WEBP — saved to patients.json</small>
+          </div>
+        </div>
+        <input type="file" id="xrayFileInp" accept="image/*" style="display:none" onchange="Modals._handleXrayFile(this)">
+        <div class="form-grid" style="margin-top:1rem">
+          <div class="form-group"><label>X-Ray Date</label><input type="date" id="np_xray_date" value="${new Date().toISOString().split('T')[0]}"></div>
+          <div class="form-group"><label>X-Ray Notes</label><input type="text" id="np_xray_notes" placeholder="e.g. Panoramic, Bitewing..."></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.registerPatient()">✓ Register Patient</button>
+    </div>
+  </div>
+
+  <!-- NEW APPOINTMENT -->
+  <div id="modalNewAppt" class="modal" style="display:none">
+    <div class="modal-head"><h3>📅 Schedule Appointment</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Patient *</label><select id="ap_patient"><option value="">Select patient…</option></select></div>
+        <div class="form-group full"><label>Doctor *</label><select id="ap_doctor"><option value="">Select doctor…</option></select></div>
+        <div class="form-group"><label>Date *</label><input id="ap_date" type="date"></div>
+        <div class="form-group"><label>Time *</label><input id="ap_time" type="time"></div>
+        <div class="form-group"><label>Duration</label><select id="ap_dur"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></div>
+        <div class="form-group"><label>Priority</label><select id="ap_priority"><option value="normal">Normal</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select></div>
+        <div class="form-group full"><label>Treatment Type</label><select id="ap_type"><option value="">Select type…</option><option>General Checkup</option><option>Cleaning/Scaling</option><option>Filling</option><option>Root Canal</option><option>Extraction</option><option>Crown/Bridge</option><option>Implant</option><option>Orthodontics</option><option>Cosmetic</option><option>Emergency</option></select></div>
+        <div class="form-group full"><label>Chief Complaint</label><input id="ap_complaint" placeholder="Main reason for visit"></div>
+        <div class="form-group full"><label>Notes</label><input id="ap_notes" placeholder="Additional notes"></div>
+        <div class="form-group"><label>Payment Method</label>
+          <select id="ap_pay_method">
+            <option value="">Select…</option>
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+            <option value="insurance">Insurance</option>
+            <option value="installment">Installment</option>
+          </select>
+        </div>
+        <div class="form-group"><label>🏷 Discount Code</label>
+          <input id="ap_discount_code" placeholder="e.g. 10 = 10% off, PROMO20 = 20% off">
+        </div>
+        <div class="form-group">
+          <label>Appointment Cost (EGP)</label>
+          <input id="ap_cost" type="number" min="0" step="0.01" placeholder="0.00"
+                 oninput="Modals._apptCommissionPreview()">
+        </div>
+      </div>
+
+      <!-- Live commission preview -->
+      <div id="apptCommPreview" style="display:none;margin-top:.75rem;background:var(--surface2);border-radius:10px;padding:.85rem 1rem">
+        <p style="font-size:.75rem;font-weight:700;color:var(--text2);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.04em">💰 Commission Breakdown</p>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.85rem">
+          <div><span style="color:var(--text2)">Total Received:</span> <strong id="apptCommTotal">—</strong></div>
+          <div><span style="color:var(--text2)">Doctor Rate:</span> <strong id="apptCommRate">—</strong></div>
+          <div><span style="color:var(--accent)">Doctor Earns:</span> <strong id="apptCommEarns" style="color:var(--accent)">—</strong></div>
+          <div><span style="color:var(--text2)">Clinic Keeps:</span> <strong id="apptCommClinic" style="color:var(--green)">—</strong></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.scheduleAppt()">✓ Schedule</button>
+    </div>
+  </div>
+
+  <!-- ADD DOCTOR -->
+  <div id="modalAddDoctor" class="modal" style="display:none;max-width:680px">
+    <div class="modal-head"><h3 id="drModalTitle">⚕️ Add Doctor</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body" style="max-height:75vh;overflow-y:auto">
+
+      <!-- TAB BAR -->
+      <div style="display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.25rem">
+        <button id="drTab1" onclick="Modals._drTab(1)"
+          style="padding:.5rem 1.1rem;background:none;border:none;border-bottom:3px solid var(--accent);color:var(--accent);font-weight:700;cursor:pointer;font-size:.85rem;margin-bottom:-2px">
+          👤 Personal Info
+        </button>
+        <button id="drTab2" onclick="Modals._drTab(2)"
+          style="padding:.5rem 1.1rem;background:none;border:none;border-bottom:3px solid transparent;color:var(--text2);cursor:pointer;font-size:.85rem;margin-bottom:-2px">
+          💰 Commissions
+        </button>
+        <button id="drTab3" onclick="Modals._drTab(3)"
+          style="padding:.5rem 1.1rem;background:none;border:none;border-bottom:3px solid transparent;color:var(--text2);cursor:pointer;font-size:.85rem;margin-bottom:-2px">
+          🎯 Abilities
+        </button>
+      </div>
+
+      <!-- TAB 1: PERSONAL INFO -->
+      <div id="drTabContent1">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Full Name *</label>
+            <input id="dr_name" placeholder="e.g. Ahmed Hassan" oninput="Actions._previewDoctorUsername(this.value)">
+            <small id="dr_name_err" style="color:var(--red);display:none">⚠ Full name is required</small>
+          </div>
+          <div class="form-group full">
+            <label>Specialty *</label>
+            <select id="dr_spec">
+              <option value="">Select specialty…</option>
+              <option>General Dentistry</option>
+              <option>Orthodontics</option>
+              <option>Endodontics</option>
+              <option>Periodontics</option>
+              <option>Oral Surgery</option>
+              <option>Prosthodontics</option>
+              <option>Pediatric Dentistry</option>
+            </select>
+            <small id="dr_spec_err" style="color:var(--red);display:none">⚠ Specialty is required</small>
+          </div>
+          <div class="form-group"><label>Phone</label><input id="dr_phone" placeholder="Phone number"></div>
+          <div class="form-group"><label>Email</label><input id="dr_email" type="email" placeholder="Email address"></div>
+          <div class="form-group"><label>License #</label><input id="dr_lic" placeholder="License number"></div>
+          <div class="form-group"><label>National ID</label><input id="dr_national_id" placeholder="National ID number"></div>
+          <div class="form-group"><label>Room</label><input id="dr_room" placeholder="e.g. Room 3"></div>
+          <div class="form-group"><label>Hire Date</label><input id="dr_hire_date" type="date"></div>
+          <div class="form-group full"><label>Schedule</label><input id="dr_sched" placeholder="e.g. Sun–Thu 9AM–5PM"></div>
+          <div class="form-group full"><label>Address</label><input id="dr_address" placeholder="Home address"></div>
+          <div class="form-group full"><label>Emergency Contact</label><input id="dr_emergency" placeholder="Name & phone of emergency contact"></div>
+          <div class="form-group full"><label>Notes</label><textarea id="dr_notes" rows="2" style="resize:vertical" placeholder="Any additional notes about this doctor…"></textarea></div>
+        </div>
+        <!-- Credentials preview -->
+        <div id="drCredentialsPreview" style="display:none;margin-top:1rem;padding:1rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <p style="margin:0 0 .5rem;font-size:.78rem;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:.05em">🔑 Auto-generated Login Credentials</p>
+          <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+            <div><span style="font-size:.72rem;color:var(--text2)">Username</span><br>
+              <code id="drPreviewUsername" style="font-size:1rem;letter-spacing:2px;color:var(--accent)">—</code></div>
+            <div><span style="font-size:.72rem;color:var(--text2)">Password</span><br>
+              <code id="drPreviewPassword" style="font-size:1rem;letter-spacing:2px;color:var(--green)">—</code></div>
+          </div>
+          <p style="margin:.5rem 0 0;font-size:.72rem;color:var(--text2)">⚠️ Save these credentials — the password won't be shown again.</p>
+        </div>
+      </div>
+
+      <!-- TAB 2: COMMISSIONS -->
+      <div id="drTabContent2" style="display:none">
+        <p style="font-size:.83rem;color:var(--text2);margin-bottom:1rem">
+          Set the percentage of each appointment payment that goes to this doctor as commission.
+          Example: if you receive 4000 EGP and the doctor's filling rate is 25%, they earn 1000 EGP.
+        </p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>General Checkup / Cleaning (%)</label>
+            <input id="dr_com_filling" type="number" min="0" max="100" step="1" value="20" placeholder="20">
+          </div>
+          <div class="form-group">
+            <label>Filling (%)</label>
+            <input id="dr_com_crown" type="number" min="0" max="100" step="1" value="20" placeholder="20">
+          </div>
+          <div class="form-group">
+            <label>Root Canal (%)</label>
+            <input id="dr_com_root" type="number" min="0" max="100" step="1" value="20" placeholder="20">
+          </div>
+          <div class="form-group">
+            <label>Extraction (%)</label>
+            <input id="dr_com_ext" type="number" min="0" max="100" step="1" value="20" placeholder="20">
+          </div>
+          <div class="form-group">
+            <label>Implant (%)</label>
+            <input id="dr_com_imp" type="number" min="0" max="100" step="1" value="25" placeholder="25">
+          </div>
+          <div class="form-group">
+            <label>Orthodontics (%)</label>
+            <input id="dr_com_ortho" type="number" min="0" max="100" step="1" value="20" placeholder="20">
+          </div>
+          <div class="form-group">
+            <label>Crown / Bridge (%)</label>
+            <input id="dr_com_other" type="number" min="0" max="100" step="1" value="15" placeholder="15">
+          </div>
+          <div class="form-group">
+            <label>Other Treatments (%)</label>
+            <input id="dr_com_misc" type="number" min="0" max="100" step="1" value="15" placeholder="15">
+          </div>
+        </div>
+        <!-- Live calculator -->
+        <div style="background:var(--surface2);border-radius:10px;padding:1rem;margin-top:.5rem">
+          <p style="font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:.6rem">💡 Commission Calculator Preview</p>
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+            <input id="dr_calc_amount" type="number" min="0" step="100" placeholder="Appointment amount (EGP)"
+                   oninput="Modals._calcDrCommission()"
+                   style="flex:1;min-width:160px;padding:.4rem .7rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+            <select id="dr_calc_type" onchange="Modals._calcDrCommission()"
+                    style="flex:1;min-width:140px;padding:.4rem .7rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+              <option value="dr_com_filling">General Checkup</option>
+              <option value="dr_com_crown">Filling</option>
+              <option value="dr_com_root">Root Canal</option>
+              <option value="dr_com_ext">Extraction</option>
+              <option value="dr_com_imp">Implant</option>
+              <option value="dr_com_ortho">Orthodontics</option>
+              <option value="dr_com_other">Crown / Bridge</option>
+              <option value="dr_com_misc">Other</option>
+            </select>
+            <div id="dr_calc_result" style="font-size:1rem;font-weight:700;color:var(--accent);min-width:140px">
+              Doctor earns: —
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: ABILITIES -->
+      <div id="drTabContent3" style="display:none">
+        <p style="font-size:.83rem;color:var(--text2);margin-bottom:1rem">
+          Select which treatments this doctor is qualified to perform.
+          When booking an appointment, only doctors with the matching ability will be shown.
+        </p>
+        <div style="display:flex;justify-content:flex-end;gap:.4rem;margin-bottom:.75rem">
+          <button class="btn-icon" onclick="Modals._drAbilitySelectAll(true)"  style="font-size:.78rem;padding:.3rem .65rem">✓ Select All</button>
+          <button class="btn-icon" onclick="Modals._drAbilitySelectAll(false)" style="font-size:.78rem;padding:.3rem .65rem">✕ Clear All</button>
+        </div>
+        <div id="drAbilitiesCheckboxes" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.4rem"></div>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" id="drSubmitBtn" onclick="Actions.addDoctor()">✓ Add Doctor</button>
+    </div>
+  </div>
+
+  <!-- ADD TRANSACTION -->
+  <div id="modalNewTx" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>💰 Add Transaction</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Description *</label><input id="tx_desc" placeholder="Transaction description"></div>
+        <div class="form-group"><label>Type *</label><select id="tx_type"><option value="income">Income</option><option value="expense">Expense</option></select></div>
+        <div class="form-group"><label>Category</label><select id="tx_cat"><option>Treatment</option><option>Consultation</option><option>Supplies</option><option>Equipment</option><option>Salary</option><option>Rent</option><option>Utilities</option><option>Other</option></select></div>
+        <div class="form-group"><label>Amount (E£) *</label><input id="tx_amount" type="number" placeholder="0.00"></div>
+        <div class="form-group"><label>Date *</label><input id="tx_date" type="date"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.addTransaction()">✓ Add Transaction</button>
+    </div>
+  </div>
+
+  <!-- ADD INVENTORY -->
+  <div id="modalAddInv" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>📦 Add Inventory Item</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Item Name *</label><input id="inv_name" placeholder="Item name"></div>
+        <div class="form-group full"><label>Category</label><select id="inv_cat"><option value="consumable">Consumable</option><option value="equipment">Equipment</option><option value="medication">Medication</option><option value="material">Material</option></select></div>
+        <div class="form-group"><label>Quantity *</label><input id="inv_qty" type="number" placeholder="0"></div>
+        <div class="form-group"><label>Min Stock Level</label><input id="inv_min" type="number" placeholder="5"></div>
+        <div class="form-group"><label>Unit Price (E£)</label><input id="inv_price" type="number" placeholder="0.00"></div>
+        <div class="form-group"><label>Supplier</label><input id="inv_supplier" placeholder="Supplier name"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.addInventoryItem()">✓ Add Item</button>
+    </div>
+  </div>
+
+  <!-- PATIENT DETAIL -->
+  <div id="modalPatientDetail" class="modal modal-xl" style="display:none">
+    <div class="modal-head">
+      <h3 id="detailPatientName">Patient Details</h3>
+      <button class="close-btn" onclick="Modals.close()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-tabs">
+        <button class="dtab active" onclick="UI.detailTab('overview',this)">Overview</button>
+        <button class="dtab" onclick="UI.detailTab('treatments',this)"><span data-t="Treatments">Treatments</span></button>
+        <button class="dtab" onclick="UI.detailTab('appointments',this)"><span data-t="Appointments">Appointments</span></button>
+        <button class="dtab" onclick="UI.detailTab('billing',this)">Billing</button>
+        <button class="dtab" onclick="UI.detailTab('xray',this)">🩻 X-Ray</button>
+        <button class="dtab" onclick="UI.detailTab('chart',this)">🦷 Chart</button>
+      </div>
+      <div id="detailOverview" class="detail-panel active"></div>
+      <div id="detailTreatments" class="detail-panel"></div>
+      <div id="detailAppointments" class="detail-panel"></div>
+      <div id="detailBilling" class="detail-panel"></div>
+      <div id="detailXray" class="detail-panel"></div>
+      <div id="detailChart" class="detail-panel"></div>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT DETAIL -->
+  <div id="modalApptDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>📅 Appointment Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="apptDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- TRANSACTION DETAIL -->
+  <div id="modalTxDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>💰 Transaction Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="txDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- INVENTORY DETAIL -->
+  <div id="modalInvDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>📦 Item Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="invDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- DOCTOR DETAIL -->
+  <div id="modalDocDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>👨‍⚕️ Doctor Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="docDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- USER DETAIL -->
+  <div id="modalUserDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>👤 User Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="userDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- NEW USER -->
+  <div id="modalNewUser" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>👤 User Account</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+
+        <!-- Step 1: pick type -->
+        <div class="form-group full">
+          <label>Account Type *</label>
+          <select id="nu_type" onchange="Modals._onUserTypeChange()">
+            <option value="">— Select type —</option>
+            <option value="staff">Staff / Employee</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+
+        <!-- Staff picker (shown when type = staff) -->
+        <div class="form-group full" id="nu_staff_row" style="display:none">
+          <label>Select Employee *</label>
+          <select id="nu_employment_id">
+            <option value="">— Loading employees… —</option>
+          </select>
+        </div>
+
+        <!-- Doctor picker (shown when type = doctor) -->
+        <div class="form-group full" id="nu_doctor_row" style="display:none">
+          <label>Select Doctor *</label>
+          <select id="nu_doctor_id">
+            <option value="">— Loading doctors… —</option>
+          </select>
+        </div>
+
+        <!-- Role (auto-set but editable) -->
+        <div class="form-group full" id="nu_role_row" style="display:none">
+          <label>System Role *</label>
+          <select id="nu_role">
+            <option value="receptionist">Receptionist</option>
+            <option value="assistant">Dental Assistant</option>
+            <option value="hygienist">Hygienist</option>
+            <option value="accountant">Accountant</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+
+        <!-- Preview (shown after selection) -->
+        <div class="form-group full" id="nu_preview" style="display:none">
+          <div style="background:var(--surface2);border-radius:8px;padding:.75rem 1rem;font-size:.85rem;color:var(--text2);line-height:1.8">
+            <div>👤 <strong>Username</strong> will be auto-generated</div>
+            <div>🔑 <strong>Password</strong> will be auto-generated</div>
+            <div style="font-size:.75rem;margin-top:.3rem;color:var(--text3)">Both will be shown after creation</div>
+          </div>
+        </div>
+
+        <!-- Edit-mode only: manual password change -->
+        <div class="form-group full" id="nu_pass_row" style="display:none">
+          <label>New Password <span style="color:var(--text3);font-weight:400">(leave blank to keep current)</span></label>
+          <input id="nu_pass" type="text" placeholder="Leave blank to keep existing password">
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-foot" id="userModalFoot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.addUser()">✓ Create User</button>
+    </div>
+  </div>
+
+  <!-- NEW DISCOUNT CODE -->
+  <div id="modalNewDiscountCode" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>🏷 Discount Code</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Code *</label><input id="dc_code" placeholder="e.g. PROMO10, SUMMER20" style="text-transform:uppercase"></div>
+        <div class="form-group"><label>Discount Type</label>
+          <select id="dc_type">
+            <option value="percent">Percent (%)</option>
+            <option value="fixed">Fixed Amount (E£)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Value *</label><input id="dc_value" type="number" min="0" placeholder="e.g. 10 for 10% or 50 for E£50"></div>
+        <div class="form-group full"><label>Description</label><input id="dc_desc" placeholder="Optional description"></div>
+        <div class="form-group full"><label>Status</label>
+          <select id="dc_active">
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot" id="discountModalFoot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.addDiscountCode()">✓ Save Code</button>
+    </div>
+  </div>
+
+  <!-- DISCOUNT CODE DETAIL -->
+  <div id="modalDiscountDetail" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>🏷 Discount Code Details</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div id="discountDetailBody" class="modal-body"></div>
+    <div class="modal-foot"><button class="btn-primary" onclick="Modals.close()">Close</button></div>
+  </div>
+
+  <!-- ADD PATIENT TO WAITING QUEUE -->
+  <div id="modalAddToQueue" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>⏳ Add Patient to Waiting Room</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Patient *</label><select id="queue_patient"><option value="">Select patient…</option></select></div>
+        <div class="form-group full"><label>Notes (optional)</label><input id="queue_notes" placeholder="e.g. Urgent, Arrived early..."></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.addPatientToQueue()">⏳ Add to Queue</button>
+    </div>
+  </div>
+
+  <!-- CONFIRM TREATMENT MODAL -->
+  <div id="modalConfirmTreatment" class="modal modal-sm" style="display:none">
+    <div class="modal-head"><h3>✅ Confirm Treatment</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+    <div class="modal-body">
+      <div id="confirmTxInfo" style="margin-bottom:1rem;padding:.75rem;background:var(--surface2);border-radius:var(--radius-sm);font-size:.9rem"></div>
+      <div class="form-grid">
+        <div class="form-group full"><label>Treatment Cost (E£) *</label><input id="ct_cost" type="number" min="0" placeholder="0.00"></div>
+        <div class="form-group full">
+          <label>Discount Code <span style="color:var(--text2);font-size:.8rem">(optional)</span></label>
+          <div style="display:flex;gap:.5rem">
+            <input id="ct_discount_code" placeholder="Enter discount code…" style="flex:1">
+            <button class="btn-icon" onclick="Actions.validateDiscountCode()">Apply</button>
+          </div>
+          <div id="ct_discount_info" style="margin-top:.4rem;font-size:.85rem;color:var(--green);display:none"></div>
+        </div>
+        <div class="form-group full">
+          <div style="display:flex;justify-content:space-between;padding:.75rem 1rem;background:var(--surface2);border-radius:var(--radius-sm);font-weight:600;font-size:1.05rem">
+            <span>Final Amount:</span>
+            <span id="ct_final_amount" style="color:var(--green)">E£ 0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+      <button class="btn-primary" onclick="Actions.confirmTreatmentModal()">✓ Confirm & Add to Finance</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<!-- Global Search Overlay -->
+<div id="globalSearchOverlay">
+  <div class="gs-box">
+    <div class="gs-input-wrap">
+      <span class="gs-icon">🔍</span>
+      <input id="globalSearchInput" type="text" placeholder="Search patients, doctors, appointments…" autocomplete="off">
+      <span class="gs-esc">ESC</span>
+    </div>
+    <div id="gsResults">
+      <div class="gs-hint">Type a patient name, appointment, or doctor…</div>
+    </div>
+    <div class="gs-shortcuts" id="gsShortcutList">
+      <div class="gs-shortcut-item" data-shortcut-page="dashboard"><span class="gs-key">D</span> Dashboard</div>
+      <div class="gs-shortcut-item" data-shortcut-page="patients"><span class="gs-key">P</span> Patients</div>
+      <div class="gs-shortcut-item" data-shortcut-page="appointments"><span class="gs-key">A</span> Appointments</div>
+      <div class="gs-shortcut-item" data-shortcut-page="appointments" data-shortcut-action="add"><span class="gs-key">N</span> New Appt</div>
+      <div class="gs-shortcut-item" data-shortcut-page="waiting"><span class="gs-key">W</span> Waiting Room</div>
+      <div class="gs-shortcut-item" data-shortcut-page="finance"><span class="gs-key">F</span> Finance</div>
+    </div>
+  </div>
+</div>
+
+<!-- Patient Rating Overlay -->
+<div id="ratingOverlay">
+  <div class="rating-box">
+    <div class="rating-emoji">⭐</div>
+    <div class="rating-title">How was your visit?</div>
+    <div class="rating-sub">Rate your experience for <strong id="ratingPatientName"></strong></div>
+    <div class="rating-stars">
+      <span class="rating-star" data-val="1"
+        onmouseenter="Ratings.hoverStar(1)" onmouseleave="Ratings.clearHover()"
+        onclick="Ratings._setStars(1)">★</span>
+      <span class="rating-star" data-val="2"
+        onmouseenter="Ratings.hoverStar(2)" onmouseleave="Ratings.clearHover()"
+        onclick="Ratings._setStars(2)">★</span>
+      <span class="rating-star" data-val="3"
+        onmouseenter="Ratings.hoverStar(3)" onmouseleave="Ratings.clearHover()"
+        onclick="Ratings._setStars(3)">★</span>
+      <span class="rating-star" data-val="4"
+        onmouseenter="Ratings.hoverStar(4)" onmouseleave="Ratings.clearHover()"
+        onclick="Ratings._setStars(4)">★</span>
+      <span class="rating-star" data-val="5"
+        onmouseenter="Ratings.hoverStar(5)" onmouseleave="Ratings.clearHover()"
+        onclick="Ratings._setStars(5)">★</span>
+    </div>
+    <div class="rating-foot">
+      <button class="rating-skip" onclick="Ratings.skip()">Skip</button>
+      <button class="rating-submit" id="ratingSubmitBtn" disabled onclick="Ratings.submit()">Submit Rating</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tooth Loader Overlay -->
+<div id="toothLoader">
+  <div class="tooth-loader-row">
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+    <div class="tl-tooth"></div>
+  </div>
+  <div class="tooth-loader-text">Loading…</div>
+</div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+
+<!-- ═══════════ JS Modules (load order matters) ═══════════ -->
+<script src="js/seed-data.js"></script>
+<script src="js/translation.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pages/dashboard.js"></script>
+<script src="js/pages/patients.js"></script>
+<script src="js/pages/appointments.js"></script>
+<script src="js/pages/doctors.js"></script>
+<script src="js/pages/finance.js"></script>
+<script src="js/pages/inventory.js"></script>
+<script src="js/pages/passwords.js"></script>
+<script src="js/pages/discount_codes.js"></script>
+<script src="js/pages/backup.js"></script>
+<script src="js/pages/messages.js"></script>
+<script src="js/pages/calendar.js"></script>
+<script src="js/pages/treatments.js"></script>
+<script src="js/pages/settings.js"></script>
+<script src="js/pages/page_access.js"></script>
+<script src="js/pages/analytics.js"></script>
+<script src="js/pages/feedback.js"></script>
+<script src="js/pages/workhours.js"></script>
+<script src="js/pages/suppliers.js"></script>
+<script src="js/pages/laborders.js"></script>
+<script src="js/pages/bulkexpense.js"></script>
+<script src="js/pages/insurance.js"></script>
+<script src="js/pages/imaging.js"></script>
+<script src="js/pages/whatsappbot.js"></script>
+<script src="js/pages/waiting.js"></script>
+<script src="js/pages/dental_chart.js"></script>
+<script src="js/pages/commissions.js"></script>
+<script src="js/pages/installments.js"></script>
+<script src="js/pages/recip.js"></script>
+<script src="js/pages/services.js"></script>
+<script src="js/pages/employment.js"></script>
+<script src="js/pages/abilities.js"></script>
+<script src="js/pages/prescription.js"></script>
+<script src="js/modals.js"></script>
+<script src="js/actions.js"></script>
+<script src="js/threed_widgets.js"></script>
+<script src="js/features.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/app.js"></script>
+
+<!-- ═══ Google Translate Auto-Translation ═══ -->
+<div id="google_translate_element" style="display:none"></div>
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'ar,en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+
+// Auto-switch if user previously selected AR
+(function() {
+  var savedLang = localStorage.getItem('dentcare_lang');
+  if (savedLang === 'ar') {
+    // Poll until Google Translate is ready then trigger AR
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var sel = document.querySelector('#google_translate_element select');
+      if (sel) {
+        sel.value = 'ar';
+        sel.dispatchEvent(new Event('change'));
+        clearInterval(timer);
+      }
+      if (attempts > 40) clearInterval(timer);
+    }, 250);
+  }
+})();
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

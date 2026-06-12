@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "service_name": "General Implant Filling",
+    "category": "implant",
+    "description": "Standard dental implant with composite filling",
+    "price": 2500,
+    "duration_min": 90,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 2,
+    "service_name": "Composite Filling",
+    "category": "filling",
+    "description": "Tooth-colored composite resin filling",
+    "price": 300,
+    "duration_min": 30,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 3,
+    "service_name": "Amalgam Filling",
+    "category": "filling",
+    "description": "Silver amalgam filling",
+    "price": 200,
+    "duration_min": 30,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 4,
+    "service_name": "Porcelain Crown",
+    "category": "crown",
+    "description": "Full porcelain ceramic crown",
+    "price": 1800,
+    "duration_min": 60,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 5,
+    "service_name": "Metal-Ceramic Crown",
+    "category": "crown",
+    "description": "Metal-fused-to-porcelain crown",
+    "price": 1400,
+    "duration_min": 60,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 6,
+    "service_name": "Full Braces (Orthodontics)",
+    "category": "orthodontics",
+    "description": "Full orthodontic treatment with metal braces",
+    "price": 5000,
+    "duration_min": 0,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 7,
+    "service_name": "Clear Aligner Therapy",
+    "category": "orthodontics",
+    "description": "Invisible aligner orthodontic treatment",
+    "price": 7000,
+    "duration_min": 0,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 8,
+    "service_name": "Simple Extraction",
+    "category": "extraction",
+    "description": "Single tooth simple extraction",
+    "price": 250,
+    "duration_min": 20,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 9,
+    "service_name": "Surgical Extraction",
+    "category": "extraction",
+    "description": "Complex surgical tooth extraction",
+    "price": 500,
+    "duration_min": 45,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 10,
+    "service_name": "Root Canal Treatment",
+    "category": "root_canal",
+    "description": "Complete root canal treatment (single canal)",
+    "price": 800,
+    "duration_min": 75,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 11,
+    "service_name": "Professional Cleaning",
+    "category": "hygiene",
+    "description": "Full mouth scaling and polishing",
+    "price": 400,
+    "duration_min": 45,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 12,
+    "service_name": "Dental X-Ray (Periapical)",
+    "category": "diagnostic",
+    "description": "Single periapical radiograph",
+    "price": 80,
+    "duration_min": 10,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 13,
+    "service_name": "Panoramic X-Ray",
+    "category": "diagnostic",
+    "description": "Full panoramic radiograph",
+    "price": 200,
+    "duration_min": 15,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 14,
+    "service_name": "Teeth Whitening",
+    "category": "cosmetic",
+    "description": "Professional in-office whitening treatment",
+    "price": 900,
+    "duration_min": 60,
+    "is_active": 1,
+    "notes": ""
+  },
+  {
+    "id": 15,
+    "service_name": "Dental Veneer (Porcelain)",
+    "category": "cosmetic",
+    "description": "Porcelain veneer per tooth",
+    "price": 1200,
+    "duration_min": 90,
+    "is_active": 1,
+    "notes": ""
+  }
+]

@@ -1,0 +1,37 @@
+<!-- ═══════════════════════════════════════════════════════ DASHBOARD -->
+<section id="pg-dashboard" class="page-content active">
+
+  <!-- KPI Cards -->
+  <div class="dash-kpi-grid" id="dashKpiGrid"></div>
+
+  <!-- Schedule + Quick Actions -->
+  <div class="dash-main-grid">
+    <div class="card dash-schedule-card">
+      <div class="card-head">
+        <h3>Today's Schedule</h3>
+        <button class="btn-all" onclick="App.page('appointments')">ALL →</button>
+      </div>
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="dashSchedBody"></tbody>
+      </table></div>
+    </div>
+    <div class="card dash-quick-card">
+      <div class="card-head"><h3>Quick Actions</h3></div>
+      <div class="dash-qa-list">
+        <button class="dash-qa-btn" onclick="Modals.newPatient()"><span>👤</span>New Patient</button>
+        <button class="dash-qa-btn" onclick="Modals.newAppointment()"><span>📅</span>New Appointment</button>
+        <button class="dash-qa-btn" onclick="Modals.newTransaction()"><span>💳</span>Add Transaction</button>
+        <button class="dash-qa-btn" onclick="App.page('inventory')"><span>📦</span>Inventory</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Trend Chart -->
+  <div class="card dash-revenue-card">
+    <div class="card-head"><h3>Revenue Trend (12 months)</h3></div>
+    <div class="dash-chart-wrap">
+      <canvas id="dashRevenueChart" height="120"></canvas>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<!-- ═══════════════════════════════════════════════════════ INVENTORY -->
+<section id="pg-inventory" class="page-content">
+  <div class="page-bar">
+    <input type="search" class="search-input" id="invSearch" placeholder="🔍  Search inventory…" oninput="Pages.inventory.search(this.value)">
+    <button class="btn-primary" onclick="Modals.addInventory()">+ Add Item</button>
+  </div>
+  <div class="card">
+    <div class="table-scroll"><table class="data-table">
+      <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Min Stock</th><th>Unit Price</th><th>Supplier</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="invBody"></tbody>
+    </table></div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<!-- ═══════════════════════════════════════════════════════ MODAL: ADD DOCTOR -->
+<div id="modalAddDoctor" class="modal" style="display:none">
+  <div class="modal-head"><h3>⚕️ Add Doctor</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+  <div class="modal-body">
+    <div class="form-grid">
+      <div class="form-group full"><label>Full Name *</label><input id="dr_name" placeholder="e.g. Ahmed Hassan" oninput="Actions._previewDoctorUsername(this.value)"></div>
+      <div class="form-group full"><label>Specialty *</label><select id="dr_spec"><option value="">Select…</option><option>General Dentistry</option><option>Orthodontics</option><option>Endodontics</option><option>Periodontics</option><option>Oral Surgery</option><option>Prosthodontics</option><option>Pediatric Dentistry</option></select></div>
+      <div class="form-group"><label>Phone</label><input id="dr_phone" placeholder="Phone number"></div>
+      <div class="form-group"><label>Email</label><input id="dr_email" type="email" placeholder="Email"></div>
+      <div class="form-group"><label>License #</label><input id="dr_lic" placeholder="License number"></div>
+      <div class="form-group"><label>Room</label><input id="dr_room" placeholder="e.g. Room 3"></div>
+      <div class="form-group full"><label>Schedule</label><input id="dr_sched" placeholder="e.g. Sun-Thu 9AM-5PM"></div>
+    </div>
+
+    <!-- Auto-generated login credentials (shown after name is entered) -->
+    <div id="drCredentialsPreview" style="display:none;margin-top:1rem;padding:1rem;background:var(--surface2,#f4f4f8);border-radius:8px;border:1px solid var(--border,#e0e0e0)">
+      <p style="margin:0 0 .5rem;font-size:.8rem;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.05em">🔑 Login Credentials (auto-generated)</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+        <div>
+          <span style="font-size:.75rem;color:var(--text2)">Username</span><br>
+          <code id="drPreviewUsername" style="font-size:1rem;letter-spacing:2px;color:var(--primary)">—</code>
+        </div>
+        <div>
+          <span style="font-size:.75rem;color:var(--text2)">Password</span><br>
+          <code id="drPreviewPassword" style="font-size:1rem;letter-spacing:2px;color:var(--green)">—</code>
+        </div>
+      </div>
+      <p style="margin:.5rem 0 0;font-size:.75rem;color:var(--text2)">⚠️ Note these credentials — the password will not be shown again.</p>
+    </div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+    <button class="btn-primary" onclick="Actions.addDoctor()">✓ Add Doctor</button>
+  </div>
+</div>

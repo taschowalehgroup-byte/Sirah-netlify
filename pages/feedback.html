@@ -1,0 +1,83 @@
+<!-- ═══════════════════════════════════════════════════════ FEEDBACK -->
+<section id="pg-feedback" class="page-content">
+
+  <!-- KPI row -->
+  <div class="fb-kpi-row" id="fbKpiRow"></div>
+
+  <!-- Toolbar -->
+  <div class="page-bar">
+    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+      <input class="search-input" id="fbSearch" placeholder="🔍  Search patient or doctor..." oninput="FeedbackPage.filter()" style="max-width:280px">
+      <select id="fbDoctorFilter" class="search-input" style="max-width:200px" onchange="FeedbackPage.filter()">
+        <option value="">All Doctors</option>
+      </select>
+      <select id="fbRatingFilter" class="search-input" style="max-width:160px" onchange="FeedbackPage.filter()">
+        <option value="">All Ratings</option>
+        <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+        <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+        <option value="3">⭐⭐⭐ 3 Stars</option>
+        <option value="2">⭐⭐ 2 Stars</option>
+        <option value="1">⭐ 1 Star</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="FeedbackPage.openAdd()">＋ Add Feedback</button>
+  </div>
+
+  <!-- Feedback cards grid -->
+  <div id="fbGrid" class="fb-grid"></div>
+
+</section>
+
+<!-- ── Add Feedback Modal ── -->
+<div class="modal-overlay" id="fbModal">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <h3>⭐ New Patient Feedback</h3>
+      <button class="close-btn" onclick="FeedbackPage.closeAdd()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Patient (optional)</label>
+          <select id="fbPatientSel"><option value="">— Anonymous —</option></select>
+        </div>
+        <div class="form-group">
+          <label>Doctor *</label>
+          <select id="fbDoctorSel"></select>
+        </div>
+        <div class="form-group">
+          <label>Visit Date</label>
+          <input type="date" id="fbVisitDate">
+        </div>
+        <div class="form-group">
+          <label>Overall Experience *</label>
+          <div class="star-picker" data-field="fbOverall"></div>
+          <input type="hidden" id="fbOverall" value="0">
+        </div>
+        <div class="form-group">
+          <label>Waiting Time</label>
+          <div class="star-picker" data-field="fbWait"></div>
+          <input type="hidden" id="fbWait" value="0">
+        </div>
+        <div class="form-group">
+          <label>Doctor's Time & Attention</label>
+          <div class="star-picker" data-field="fbDrTime"></div>
+          <input type="hidden" id="fbDrTime" value="0">
+        </div>
+        <div class="form-group">
+          <label>Clinic Cleanliness</label>
+          <div class="star-picker" data-field="fbClean"></div>
+          <input type="hidden" id="fbClean" value="0">
+        </div>
+        <div class="form-group full">
+          <label>Comment</label>
+          <textarea id="fbComment" placeholder="Patient's comments..." style="min-height:80px"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="FeedbackPage.closeAdd()">Cancel</button>
+      <button class="btn-primary" onclick="FeedbackPage.submit()">Save Feedback</button>
+    </div>
+  </div>
+</div>

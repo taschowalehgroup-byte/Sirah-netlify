@@ -1,0 +1,21 @@
+<!-- ═══════════════════════════════════════════════════════ MODAL: PATIENT DETAIL -->
+<div id="modalPatientDetail" class="modal modal-xl" style="display:none">
+  <div class="modal-head">
+    <h3 id="detailPatientName">Patient Details</h3>
+    <button class="close-btn" onclick="Modals.close()">×</button>
+  </div>
+  <div class="modal-body">
+    <div class="detail-tabs">
+      <button class="dtab active" onclick="UI.detailTab('overview',this)">Overview</button>
+      <button class="dtab" onclick="UI.detailTab('treatments',this)">Treatments</button>
+      <button class="dtab" onclick="UI.detailTab('appointments',this)">Appointments</button>
+      <button class="dtab" onclick="UI.detailTab('billing',this)">Billing</button>
+      <button class="dtab" onclick="UI.detailTab('xray',this)">🩻 X-Ray</button>
+    </div>
+    <div id="detailOverview" class="detail-panel active"></div>
+    <div id="detailTreatments" class="detail-panel"></div>
+    <div id="detailAppointments" class="detail-panel"></div>
+    <div id="detailBilling" class="detail-panel"></div>
+    <div id="detailXray" class="detail-panel"></div>
+  </div>
+</div>

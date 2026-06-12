@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "table": "inventory",
+    "updated": "2026-05-25T14:45:09.959Z",
+    "count": 6
+  },
+  "data": [
+    {
+      "id": 1,
+      "item_name": "Composite Resin A2",
+      "category": "material",
+      "quantity": 12,
+      "min_stock": 5,
+      "unit_price": 180,
+      "supplier": "DentSupply Co.",
+      "notes": null,
+      "last_updated": "2026-04-29 11:46:55"
+    },
+    {
+      "id": 2,
+      "item_name": "Surgical Gloves (L)",
+      "category": "consumable",
+      "quantity": 8,
+      "min_stock": 20,
+      "unit_price": 35,
+      "supplier": "MediGlove Egypt",
+      "notes": null,
+      "last_updated": "2026-04-29 11:46:55"
+    },
+    {
+      "id": 3,
+      "item_name": "Amoxicillin 500mg",
+      "category": "medication",
+      "quantity": 50,
+      "min_stock": 30,
+      "unit_price": 12,
+      "supplier": "Pharma Plus",
+      "notes": null,
+      "last_updated": "2026-04-29 11:46:55"
+    },
+    {
+      "id": 4,
+      "item_name": "Dental X-Ray Machine",
+      "category": "equipment",
+      "quantity": 2,
+      "min_stock": 1,
+      "unit_price": 45000,
+      "supplier": "Sirona Egypt",
+      "notes": null,
+      "last_updated": "2026-04-29 11:46:55"
+    },
+    {
+      "id": 5,
+      "item_name": "Suction Tips",
+      "category": "consumable",
+      "quantity": 3,
+      "min_stock": 10,
+      "unit_price": 25,
+      "supplier": "DentSupply Co.",
+      "notes": null,
+      "last_updated": "2026-04-29 11:46:55"
+    },
+    {
+      "id": 6,
+      "item_name": "kolidrohaight",
+      "category": "medication",
+      "quantity": 100,
+      "min_stock": 100,
+      "unit_price": 100000,
+      "supplier": "Kolidor",
+      "notes": null,
+      "last_updated": "2026-05-25T14:45:09.951Z"
+    }
+  ]
+}

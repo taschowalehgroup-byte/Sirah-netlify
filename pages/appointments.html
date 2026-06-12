@@ -1,0 +1,19 @@
+<!-- ═══════════════════════════════════════════════════════ APPOINTMENTS -->
+<section id="pg-appointments" class="page-content">
+  <div class="page-bar">
+    <div class="filter-tabs" id="apptFilters">
+      <button class="ftab active" onclick="Pages.appointments.filter('all',this)">All</button>
+      <button class="ftab" onclick="Pages.appointments.filter('scheduled',this)">Scheduled</button>
+      <button class="ftab" onclick="Pages.appointments.filter('confirmed',this)">Confirmed</button>
+      <button class="ftab" onclick="Pages.appointments.filter('completed',this)">Completed</button>
+      <button class="ftab" onclick="Pages.appointments.filter('cancelled',this)">Cancelled</button>
+    </div>
+    <button class="btn-primary" onclick="Modals.newAppointment()">+ Schedule</button>
+  </div>
+  <div class="card">
+    <div class="table-scroll"><table class="data-table">
+      <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Treatment</th><th>Priority</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="apptBody"></tbody>
+    </table></div>
+  </div>
+</section>

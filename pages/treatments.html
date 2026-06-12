@@ -1,0 +1,20 @@
+<!-- ═══════════════════════════════════════════════════════ TREATMENTS -->
+<section id="pg-treatments" class="page-content">
+  <div class="page-bar">
+    <h2 style="color:var(--text)">Treatments</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <input type="text" placeholder="🔍 Search..." oninput="TreatmentsPage.search(this.value)"
+             style="padding:.45rem .9rem;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm)">
+      <button class="btn-icon" onclick="TreatmentsPage.importFile()">⬆ Import Excel/JSON</button>
+      <button class="btn-icon" onclick="TreatmentsPage.exportExcel()">⬇ Export Excel</button>
+      <button class="btn-icon" onclick="TreatmentsPage.exportJson()">⬇ Export JSON</button>
+      <button class="btn-icon accent" onclick="TreatmentsPage._addModal()">+ Add Treatment</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-scroll"><table class="data-table">
+      <thead><tr><th>Patient</th><th>Doctor</th><th>Treatment</th><th>Tooth</th><th>Date</th><th>Diagnosis</th><th>Cost</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="treatBody"></tbody>
+    </table></div>
+  </div>
+</section>

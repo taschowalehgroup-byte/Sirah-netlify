@@ -1,0 +1,23 @@
+<!-- ═══════════════════════════════════════════════════════ FINANCE -->
+<section id="pg-finance" class="page-content" data-print-title="Finance">
+  <div class="page-bar">
+    <div class="filter-tabs" id="finFilters">
+      <button class="ftab active" onclick="Pages.finance.filter('all',this)">All</button>
+      <button class="ftab" onclick="Pages.finance.filter('income',this)">Income</button>
+      <button class="ftab" onclick="Pages.finance.filter('expense',this)">Expense</button>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button class="btn-icon" onclick="Pages.finance.importFile()">⬆ Import</button>
+      <button class="btn-icon" onclick="Pages.finance.exportExcel()">⬇ Excel</button>
+      <button class="btn-icon" onclick="Pages.finance.exportJson()">⬇ JSON</button>
+      <button class="btn-primary" onclick="Modals.newTransaction()">+ Transaction</button>
+    </div>
+  </div>
+  <div class="finance-summary" id="financeSummary"></div>
+  <div class="card">
+    <div class="table-scroll"><table class="data-table">
+      <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th><th>Actions</th></tr></thead>
+      <tbody id="financeBody"></tbody>
+    </table></div>
+  </div>
+</section>

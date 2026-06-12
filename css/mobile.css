@@ -1,0 +1,360 @@
+/* ═══════════════════════════════════════════════════════
+   DentCare Pro — Mobile CSS
+   Targets phones (max-width: 640px) and tablets (max-width: 900px)
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Login Page ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  #loginWrapper {
+    padding: 1rem !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #loginCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 2rem 1.25rem !important;
+    border-radius: 16px !important;
+  }
+
+  .login-logo { width: 64px !important; height: 64px !important; }
+  .login-title { font-size: 1.4rem !important; }
+  .login-subtitle { font-size: .8rem !important; }
+
+  .login-select, .login-input, .login-btn {
+    font-size: .95rem !important;
+    padding: .75rem 1rem !important;
+  }
+}
+
+/* ── Layout ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Topbar */
+  #topbar {
+    padding: 0 1rem !important;
+    height: 56px !important;
+  }
+  .topbar-date { display: none !important; }
+  .topbar-right { gap: .4rem !important; }
+  .topbar-right .btn, .topbar-right button {
+    padding: .35rem .6rem !important;
+    font-size: .75rem !important;
+  }
+
+  /* Page content */
+  .page-content {
+    padding: 1rem !important;
+  }
+
+  /* Page bar */
+  .page-bar, .page-toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .75rem !important;
+  }
+  .page-bar .btn, .page-toolbar .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Tables — horizontal scroll */
+  .table-wrap, .tbl-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  table {
+    min-width: 600px !important;
+  }
+
+  /* Sidebar — hidden by default on mobile */
+  #sidebar {
+    position: fixed !important;
+    left: 0 !important; top: 0 !important; bottom: 0 !important;
+    z-index: 200 !important;
+    transform: translateX(-100%) !important;
+    width: 260px !important;
+    pointer-events: none !important;
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1) !important;
+  }
+  #sidebar.open {
+    transform: translateX(0) !important;
+    pointer-events: all !important;
+    box-shadow: 8px 0 40px rgba(0,0,0,0.45) !important;
+  }
+  #main { width: 100% !important; margin-left: 0 !important; }
+
+  /* Overlay */
+  #sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 199;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  #sidebarOverlay.active { display: block !important; }
+}
+
+/* ── Dashboard ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dash-kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: .75rem !important;
+  }
+  .dash-kpi-card {
+    padding: 1rem !important;
+  }
+  .dkpi-value { font-size: 1.5rem !important; }
+  .dkpi-label { font-size: .7rem !important; }
+  .dkpi-sub   { font-size: .65rem !important; }
+
+  .dash-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Quick hub buttons */
+  .quick-hub-grid, .qhub-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: .5rem !important;
+  }
+  .qhub-btn { padding: .75rem .5rem !important; font-size: .75rem !important; }
+}
+
+/* ── Patients / Appointments / Treatments tables ─────── */
+@media (max-width: 640px) {
+  /* Card-style rows instead of table on phones */
+  .mobile-card-table thead { display: none !important; }
+  .mobile-card-table tbody tr {
+    display: block !important;
+    background: var(--surface) !important;
+    border-radius: 12px !important;
+    margin-bottom: .75rem !important;
+    padding: .75rem 1rem !important;
+    border: 1px solid var(--divider) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  }
+  .mobile-card-table tbody td {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: .3rem 0 !important;
+    border: none !important;
+    font-size: .85rem !important;
+  }
+  .mobile-card-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text2);
+    font-size: .75rem;
+    flex-shrink: 0;
+    margin-right: .5rem;
+  }
+
+  /* Search + filter bar */
+  .filter-bar, .search-bar {
+    flex-direction: column !important;
+    gap: .5rem !important;
+  }
+  .filter-bar input, .filter-bar select,
+  .search-bar input, .search-bar select {
+    width: 100% !important;
+  }
+}
+
+/* ── Modals ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+  .modal-box, .modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 1.25rem !important;
+  }
+  .modal-header {
+    position: sticky !important;
+    top: 0 !important;
+    background: var(--surface) !important;
+    z-index: 2 !important;
+    padding-bottom: .75rem !important;
+    margin-bottom: .75rem !important;
+    border-bottom: 1px solid var(--divider) !important;
+  }
+  .modal-title { font-size: 1rem !important; }
+
+  /* Form grid inside modals — single column */
+  .form-grid, .modal-grid {
+    grid-template-columns: 1fr !important;
+    gap: .75rem !important;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+  .modal-footer, .modal-actions {
+    flex-direction: column !important;
+    gap: .5rem !important;
+  }
+  .modal-footer .btn, .modal-actions .btn {
+    width: 100% !important;
+  }
+}
+
+/* ── Finance / Analytics ──────────────────────────────── */
+@media (max-width: 640px) {
+  .fin-kpi-grid, .an-kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: .75rem !important;
+  }
+  .fin-card { padding: .75rem !important; }
+  .fin-value { font-size: 1.2rem !important; }
+
+  .chart-wrap, .chart-container {
+    height: 220px !important;
+  }
+}
+
+/* ── Waiting Room ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .waiting-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .waiting-card {
+    padding: .75rem !important;
+  }
+}
+
+/* ── Settings grid ────────────────────────────────────── */
+@media (max-width: 640px) {
+  .settings-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .settings-section {
+    padding: 1rem !important;
+  }
+}
+
+/* ── Topbar action buttons — hide labels, show icons only ─*/
+@media (max-width: 480px) {
+  .topbar-right .btn-label { display: none !important; }
+  .topbar-right .btn { min-width: 36px !important; padding: .35rem !important; }
+
+  /* Shrink page heading */
+  .page-heading { font-size: 1rem !important; }
+
+  /* KPI 1 column on very small screens */
+  .dash-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .fin-kpi-grid, .an-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ── Sidebar hamburger visible on mobile ──────────────── */
+@media (max-width: 768px) {
+  .menu-toggle { display: flex !important; }
+
+  /* Close sidebar when clicking outside */
+  body.sidebar-open #sidebarOverlay { display: block !important; }
+  body.sidebar-open #sidebar { transform: translateX(0) !important; pointer-events: all !important; }
+}
+
+/* ── Scrollbar hide on mobile ─────────────────────────── */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+}
+
+/* ── Bottom safe area for iPhone notch ───────────────────*/
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 768px) {
+    #main {
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+}
+
+/* ── Topbar compact on mobile ─────────────────────────── */
+@media (max-width: 768px) {
+  /* Hide non-essential topbar buttons */
+  .mobile-hide { display: none !important; }
+
+  /* Hide Search text label, keep icon */
+  .topbar-btn-label { display: none !important; }
+
+  /* Compact topbar buttons */
+  .topbar-right { gap: .3rem !important; }
+  .topbar-right .btn-icon {
+    padding: .4rem .55rem !important;
+    font-size: .8rem !important;
+    min-width: unset !important;
+    white-space: nowrap !important;
+  }
+
+  /* Page title shorter */
+  .page-title {
+    font-size: .9rem !important;
+    max-width: 120px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  /* Full width content area */
+  #main {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  .page-content {
+    padding: .75rem !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Waiting room table fix */
+  .waiting-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* All page sections full width */
+  .page-section, .card, .fin-card, .kpi-card {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* ── Prevent body horizontal scroll ──────────────────── */
+body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* ── Hide Google Translate toolbar banner ─────────────── */
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+.skiptranslate {
+  display: none !important;
+}
+iframe.goog-te-banner-frame {
+  display: none !important;
+}

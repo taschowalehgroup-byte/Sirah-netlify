@@ -1,0 +1,13 @@
+<!-- ═══════════════════════════════════════════════════════ SETTINGS -->
+<section id="pg-settings" class="page-content">
+  <div class="page-bar">
+    <h2 style="color:var(--text)">Settings</h2>
+  </div>
+  <!-- Settings Tabs -->
+  <div class="settings-tabs">
+    <button class="settings-tab active" data-tab="general" onclick="SettingsPage.switchTab('general')">⚙️ General</button>
+    <button class="settings-tab admin-only" data-tab="page-access" onclick="SettingsPage.switchTab('page-access')">🔐 Page Access</button>
+  </div>
+  <div id="settingsWrap" class="settings-tab-pane active"></div>
+  <div id="settingsPageAccess" class="settings-tab-pane"></div>
+</section>

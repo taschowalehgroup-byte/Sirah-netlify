@@ -1,0 +1,21 @@
+<!-- ═══════════════════════════════════════════════════════ MODAL: NEW APPOINTMENT -->
+<div id="modalNewAppt" class="modal" style="display:none">
+  <div class="modal-head"><h3>📅 Schedule Appointment</h3><button class="close-btn" onclick="Modals.close()">×</button></div>
+  <div class="modal-body">
+    <div class="form-grid">
+      <div class="form-group full"><label>Patient *</label><select id="ap_patient"><option value="">Select patient…</option></select></div>
+      <div class="form-group full"><label>Doctor *</label><select id="ap_doctor"><option value="">Select doctor…</option></select></div>
+      <div class="form-group"><label>Date *</label><input id="ap_date" type="date"></div>
+      <div class="form-group"><label>Time *</label><input id="ap_time" type="time"></div>
+      <div class="form-group"><label>Duration</label><select id="ap_dur"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></div>
+      <div class="form-group"><label>Priority</label><select id="ap_priority"><option value="normal">Normal</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select></div>
+      <div class="form-group full"><label>Treatment Type</label><select id="ap_type"><option value="">Select type…</option><option>General Checkup</option><option>Cleaning/Scaling</option><option>Filling</option><option>Root Canal</option><option>Extraction</option><option>Crown/Bridge</option><option>Implant</option><option>Orthodontics</option><option>Cosmetic</option><option>Emergency</option></select></div>
+      <div class="form-group full"><label>Chief Complaint</label><input id="ap_complaint" placeholder="Main reason for visit"></div>
+      <div class="form-group full"><label>Notes</label><input id="ap_notes" placeholder="Additional notes"></div>
+    </div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn-ghost" onclick="Modals.close()">Cancel</button>
+    <button class="btn-primary" onclick="Actions.scheduleAppt()">✓ Schedule</button>
+  </div>
+</div>

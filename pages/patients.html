@@ -1,0 +1,13 @@
+<!-- ═══════════════════════════════════════════════════════ PATIENTS -->
+<section id="pg-patients" class="page-content">
+  <div class="page-bar">
+    <input type="search" class="search-input" id="patientSearch" placeholder="🔍  Search patients…" oninput="Pages.patients.search(this.value)">
+    <button class="btn-primary" onclick="Modals.newPatient()">+ Register Patient</button>
+  </div>
+  <div class="card">
+    <div class="table-scroll"><table class="data-table">
+      <thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Age</th><th>Gender</th><th>Insurance</th><th>Registered</th><th>Actions</th></tr></thead>
+      <tbody id="patientBody"></tbody>
+    </table></div>
+  </div>
+</section>
